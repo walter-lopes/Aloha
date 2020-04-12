@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29409.12
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.RabbitMQ", "src\Aloha.RabbitMQ\Aloha.RabbitMQ.csproj", "{4016EE74-5F0C-47F3-B338-EED9B06BD6FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{6CEBED5A-5E6D-43C6-BBF1-14EAFD09E603}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.Services.Products", "samples\Aloha.Services.Products\Aloha.Services.Products.csproj", "{72AFC760-A7E5-43D4-9199-91FA40DC8DEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.Services.Products", "samples\Aloha.Services.Products\Aloha.Services.Products\Aloha.Services.Products.csproj", "{BEC85A62-7D51-4A6D-AC38-858A944F5B4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,16 +19,16 @@ Global
 		{4016EE74-5F0C-47F3-B338-EED9B06BD6FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4016EE74-5F0C-47F3-B338-EED9B06BD6FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4016EE74-5F0C-47F3-B338-EED9B06BD6FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{72AFC760-A7E5-43D4-9199-91FA40DC8DEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72AFC760-A7E5-43D4-9199-91FA40DC8DEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72AFC760-A7E5-43D4-9199-91FA40DC8DEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72AFC760-A7E5-43D4-9199-91FA40DC8DEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEC85A62-7D51-4A6D-AC38-858A944F5B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEC85A62-7D51-4A6D-AC38-858A944F5B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEC85A62-7D51-4A6D-AC38-858A944F5B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEC85A62-7D51-4A6D-AC38-858A944F5B4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{72AFC760-A7E5-43D4-9199-91FA40DC8DEB} = {6CEBED5A-5E6D-43C6-BBF1-14EAFD09E603}
+		{BEC85A62-7D51-4A6D-AC38-858A944F5B4C} = {6CEBED5A-5E6D-43C6-BBF1-14EAFD09E603}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {764D7452-E2AD-4907-8F13-D1C2545421FC}
