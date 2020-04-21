@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Aloha.RabbitMQ.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aloha.Services.Products.Controllers
@@ -10,11 +11,20 @@ namespace Aloha.Services.Products.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IMessagePublisher _messagePublisher;
+
+        public ValuesController(IMessagePublisher messagePublisher)
+        {
+            _messagePublisher = messagePublisher;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<ActionResult<IEnumerable<string>>> Get()
         {
-            return new string[] { "value1", "value2" };
+            await _messagePublisher.PublishMessageAsync("correlationId", new { message = "message" }, "routingkey");
+
+            return new List<string>();
         }
 
         // GET api/values/5

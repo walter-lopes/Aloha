@@ -14,4 +14,8 @@
     <ProjectReference Include="..\..\..\src\Aloha.RabbitMQ\Aloha.RabbitMQ.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Handlers\" />
+  </ItemGroup>
+
 </Project>

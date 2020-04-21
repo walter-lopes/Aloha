@@ -32,7 +32,7 @@ namespace Aloha.Services.Products
                 string rabbitMQHost = rabbitMQConfigSection["Host"];
                 string rabbitMQUserName = rabbitMQConfigSection["UserName"];
                 string rabbitMQPassword = rabbitMQConfigSection["Password"];
-                return new RabbitMQMessageHandler(rabbitMQHost, rabbitMQUserName, rabbitMQPassword, "Pitstop", "WorkshopManagement", "");
+                return new RabbitMQMessageHandler(rabbitMQHost, rabbitMQUserName, rabbitMQPassword, "aloha", "products", "");
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

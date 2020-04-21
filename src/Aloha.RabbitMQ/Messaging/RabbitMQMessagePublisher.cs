@@ -42,6 +42,7 @@ namespace Aloha.RabbitMQ.Messaging
                         {
                             using (var model = connection.CreateModel())
                             {
+                            
                                 model.ExchangeDeclare(_exchange, "fanout", durable: true, autoDelete: false);
                                 string data = MessageSerializer.Serialize(message);
                                 var body = Encoding.UTF8.GetBytes(data);
