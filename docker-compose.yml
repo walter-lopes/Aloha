@@ -10,8 +10,8 @@ services:
       - "15672:15672"
       - "5672:5672"
     environment:
-      - RABBITMQ_DEFAULT_USER=rabbitmquser
-      - RABBITMQ_DEFAULT_PASS=DEBmbwkSrzy9D1T9cJfa
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
 
 volumes:  
   rabbitmqdata:

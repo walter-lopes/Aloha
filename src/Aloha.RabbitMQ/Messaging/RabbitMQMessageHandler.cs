@@ -72,7 +72,7 @@ namespace Aloha.RabbitMQ.Messaging
         {
             string correlationId = Encoding.UTF8.GetString((byte[])ea.BasicProperties.Headers["CorrelationId"]);
 
-            string body = Encoding.UTF8.GetString(ea.Body);
+            string body = Encoding.UTF8.GetString(ea.Body.ToArray());
 
             return _callback.HandleMessageAsync(correlationId, body);
         }

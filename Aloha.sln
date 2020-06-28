@@ -1,13 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.RabbitMQ", "src\Aloha.RabbitMQ\Aloha.RabbitMQ.csproj", "{4016EE74-5F0C-47F3-B338-EED9B06BD6FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{6CEBED5A-5E6D-43C6-BBF1-14EAFD09E603}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.Services.Products", "samples\Aloha.Services.Products\Aloha.Services.Products\Aloha.Services.Products.csproj", "{BEC85A62-7D51-4A6D-AC38-858A944F5B4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.Services.Products", "samples\Aloha.Services.Products\Aloha.Services.Products\Aloha.Services.Products.csproj", "{BEC85A62-7D51-4A6D-AC38-858A944F5B4C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{65DDED9C-3011-4225-BE10-C25442471F1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha", "src\Aloha\Aloha.csproj", "{DE764103-F32A-430F-8D83-1E22399B0065}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.MessageBrokers", "src\Aloha.MessageBrokers\Aloha.MessageBrokers.csproj", "{F3AE52AB-4F3D-4DFB-A970-10F97EC228BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +29,23 @@ Global
 		{BEC85A62-7D51-4A6D-AC38-858A944F5B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEC85A62-7D51-4A6D-AC38-858A944F5B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEC85A62-7D51-4A6D-AC38-858A944F5B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE764103-F32A-430F-8D83-1E22399B0065}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE764103-F32A-430F-8D83-1E22399B0065}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE764103-F32A-430F-8D83-1E22399B0065}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE764103-F32A-430F-8D83-1E22399B0065}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3AE52AB-4F3D-4DFB-A970-10F97EC228BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3AE52AB-4F3D-4DFB-A970-10F97EC228BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3AE52AB-4F3D-4DFB-A970-10F97EC228BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3AE52AB-4F3D-4DFB-A970-10F97EC228BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{4016EE74-5F0C-47F3-B338-EED9B06BD6FC} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 		{BEC85A62-7D51-4A6D-AC38-858A944F5B4C} = {6CEBED5A-5E6D-43C6-BBF1-14EAFD09E603}
+		{DE764103-F32A-430F-8D83-1E22399B0065} = {65DDED9C-3011-4225-BE10-C25442471F1D}
+		{F3AE52AB-4F3D-4DFB-A970-10F97EC228BC} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {764D7452-E2AD-4907-8F13-D1C2545421FC}

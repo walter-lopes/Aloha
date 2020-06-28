@@ -2,31 +2,50 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Aloha.MessageBrokers;
 using Aloha.RabbitMQ.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aloha.Services.Products.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("values")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly IMessagePublisher _messagePublisher;
+        private readonly IBusPublisher _publisher;
+        private readonly IBusSubscriber _subscriber;
 
-        public ValuesController(IMessagePublisher messagePublisher)
-        {
-            _messagePublisher = messagePublisher;
+        public ValuesController(IBusPublisher publisher, IBusSubscriber subscriber)
+        { 
+            _publisher = publisher;
+            _subscriber = subscriber;
         }
 
         // GET api/values
         [HttpGet]
         public async Task<ActionResult<IEnumerable<string>>> Get()
         {
-            await _messagePublisher.PublishMessageAsync("correlationId", new { message = "message" }, "routingkey");
+            try
+            {
+                await _publisher.PublishAsync(new ProductCreated() { Id = Guid.NewGuid(), Name = "XXT" });
+
+                _subscriber.Subscribe<ProductCreated>(async (serviceProvider, @event, _) =>
+                {
+                    await new ProductEventHandler().HandleAsync(@event);
+                });
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+         
+
 
             return new List<string>();
         }
 
+          
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
