@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aloha.RabbitMQ.Plugins
+namespace Aloha.MessageBrokers.RabbitMQ.Plugins
 {
     internal sealed class RabbitMqPluginsExecutor : IRabbitMqPluginsExecutor
     {

@@ -1,4 +1,4 @@
-﻿namespace Aloha.RabbitMQ
+﻿namespace Aloha.MessageBrokers.RabbitMQ
 {
     public interface IRabbitMqSerializer
     {

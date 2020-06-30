@@ -1,10 +1,10 @@
-﻿using Aloha.RabbitMQ.Messaging;
+﻿using Aloha.MessageBrokers.RabbitMQ.Messaging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Aloha.RabbitMQ;
+using Aloha.MessageBrokers.RabbitMQ;
 
 namespace Aloha.Services.Products
 {

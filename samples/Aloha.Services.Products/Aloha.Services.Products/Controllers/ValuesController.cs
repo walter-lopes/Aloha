@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Aloha.MessageBrokers;
-using Aloha.RabbitMQ.Messaging;
 using Microsoft.AspNetCore.Mvc;
+using Aloha.MessageBrokers;
 
 namespace Aloha.Services.Products.Controllers
 {

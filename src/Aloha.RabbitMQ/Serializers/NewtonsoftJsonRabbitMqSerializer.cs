@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Aloha.RabbitMQ.Serializers
+namespace Aloha.MessageBrokers.RabbitMQ.Serializers
 {
     public class NewtonsoftJsonRabbitMqSerializer : IRabbitMqSerializer
     {

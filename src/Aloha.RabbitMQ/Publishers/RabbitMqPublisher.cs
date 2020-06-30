@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aloha.RabbitMQ.Publishers
+namespace Aloha.MessageBrokers.RabbitMQ.Publishers
 {
     class RabbitMqPublisher : IBusPublisher
     {

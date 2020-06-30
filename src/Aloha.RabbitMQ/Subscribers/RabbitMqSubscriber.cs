@@ -8,7 +8,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aloha.RabbitMQ.Subscribers
+namespace Aloha.MessageBrokers.RabbitMQ.Subscribers
 {
     public class RabbitMqSubscriber : IBusSubscriber
     {
@@ -94,10 +94,11 @@ namespace Aloha.RabbitMQ.Subscribers
                     }
 
                     var payload = Encoding.UTF8.GetString(args.Body.Span);
+
                     var message = _rabbitMqSerializer.Deserialize<T>(payload);
 
-                    Task Next(object m, object ctx, BasicDeliverEventArgs a)
-                       => TryHandleAsync((T)m, messageId, correlationId, ctx, a, handle);
+                    Task Next(object m, object ctx, BasicDeliverEventArgs a) 
+                    => TryHandleAsync((T)m, messageId, correlationId, ctx, a, handle);
 
                     await _pluginsExecutor.ExecuteAsync(Next, message, null, args);
                 }

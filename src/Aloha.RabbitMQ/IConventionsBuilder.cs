@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Aloha.RabbitMQ
+namespace Aloha.MessageBrokers.RabbitMQ
 {
     public interface IConventionsBuilder
     {

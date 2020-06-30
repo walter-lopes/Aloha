@@ -5,7 +5,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aloha.RabbitMQ.Messaging
+namespace Aloha.MessageBrokers.RabbitMQ.Messaging
 {
     public class RabbitMQMessageHandler : IMessageHandler
     {

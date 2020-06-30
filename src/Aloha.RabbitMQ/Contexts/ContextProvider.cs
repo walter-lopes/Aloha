@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aloha.RabbitMQ.Contexts
+namespace Aloha.MessageBrokers.RabbitMQ.Contexts
 {
     internal sealed class ContextProvider : IContextProvider
     {

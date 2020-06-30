@@ -1,4 +1,4 @@
-﻿namespace Aloha.RabbitMQ.Messaging
+﻿namespace Aloha.MessageBrokers.RabbitMQ.Messaging
 {
     public interface IMessageHandler
     {

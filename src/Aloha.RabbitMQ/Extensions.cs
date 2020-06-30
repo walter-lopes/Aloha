@@ -1,19 +1,19 @@
 ﻿using Aloha.MessageBrokers;
-using Aloha.RabbitMQ.Clients;
-using Aloha.RabbitMQ.Contexts;
-using Aloha.RabbitMQ.Conventions;
-using Aloha.RabbitMQ.Initializers;
-using Aloha.RabbitMQ.Internals;
-using Aloha.RabbitMQ.Plugins;
-using Aloha.RabbitMQ.Publishers;
-using Aloha.RabbitMQ.Serializers;
-using Aloha.RabbitMQ.Subscribers;
+using Aloha.MessageBrokers.RabbitMQ.Clients;
+using Aloha.MessageBrokers.RabbitMQ.Contexts;
+using Aloha.MessageBrokers.RabbitMQ.Conventions;
+using Aloha.MessageBrokers.RabbitMQ.Initializers;
+using Aloha.MessageBrokers.RabbitMQ.Internals;
+using Aloha.MessageBrokers.RabbitMQ.Plugins;
+using Aloha.MessageBrokers.RabbitMQ.Publishers;
+using Aloha.MessageBrokers.RabbitMQ.Serializers;
+using Aloha.MessageBrokers.RabbitMQ.Subscribers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
 using System;
 
-namespace Aloha.RabbitMQ
+namespace Aloha.MessageBrokers.RabbitMQ
 {
     public static class Extensions
     {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Aloha.RabbitMQ.Initializers
+namespace Aloha.MessageBrokers.RabbitMQ.Initializers
 {
     public class RabbitMqExchangeInitializer : IInitializer
     {

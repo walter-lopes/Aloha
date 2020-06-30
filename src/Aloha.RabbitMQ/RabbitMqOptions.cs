@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace Aloha.RabbitMQ
+namespace Aloha.MessageBrokers.RabbitMQ
 {
     public class RabbitMqOptions
     {

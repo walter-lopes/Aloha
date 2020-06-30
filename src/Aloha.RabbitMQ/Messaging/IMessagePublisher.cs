@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Aloha.RabbitMQ.Messaging
+namespace Aloha.MessageBrokers.RabbitMQ.Messaging
 {
     public interface IMessagePublisher
     {

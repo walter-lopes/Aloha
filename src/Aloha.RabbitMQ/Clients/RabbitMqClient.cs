@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aloha.RabbitMQ.Clients
+namespace Aloha.MessageBrokers.RabbitMQ.Clients
 {
     public class RabbitMqClient : IRabbitMqClient
     {
@@ -30,8 +30,8 @@ namespace Aloha.RabbitMQ.Clients
         public Task Send(object message, IConventions conventions, string messageId = null, string correlationId = null,
             string spanContext = null, object messageContext = null, IDictionary<string, object> headers = null)
         {
-
             var payload = _serializer.Serialize(message);
+
             var body = Encoding.UTF8.GetBytes(payload);
 
             IBasicProperties properties = CreateProperties(messageId, correlationId, headers);

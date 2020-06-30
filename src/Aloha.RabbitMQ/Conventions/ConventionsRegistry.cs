@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Aloha.RabbitMQ.Conventions
+namespace Aloha.MessageBrokers.RabbitMQ.Conventions
 {
     class ConventionsRegistry : IConventionsRegistry
     {

@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Aloha.RabbitMQ
+namespace Aloha.MessageBrokers.RabbitMQ
 {
     internal interface IRabbitMqPluginsExecutor
     {

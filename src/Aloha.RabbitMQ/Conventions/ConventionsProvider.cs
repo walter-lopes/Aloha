@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 
-namespace Aloha.RabbitMQ.Conventions
+namespace Aloha.MessageBrokers.RabbitMQ.Conventions
 {
     public class ConventionsProvider : IConventionsProvider
     {

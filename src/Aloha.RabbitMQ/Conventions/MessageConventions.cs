@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aloha.RabbitMQ.Conventions
+namespace Aloha.MessageBrokers.RabbitMQ.Conventions
 {
     class MessageConventions : IConventions
     {

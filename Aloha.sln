@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.RabbitMQ", "src\Aloha.RabbitMQ\Aloha.RabbitMQ.csproj", "{4016EE74-5F0C-47F3-B338-EED9B06BD6FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.MessageBrokers.RabbitMQ", "src\Aloha.RabbitMQ\Aloha.MessageBrokers.RabbitMQ.csproj", "{4016EE74-5F0C-47F3-B338-EED9B06BD6FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{6CEBED5A-5E6D-43C6-BBF1-14EAFD09E603}"
 EndProject

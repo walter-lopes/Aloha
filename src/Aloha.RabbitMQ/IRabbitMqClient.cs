@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Aloha.RabbitMQ
+namespace Aloha.MessageBrokers.RabbitMQ
 {
     public interface IRabbitMqClient
     {

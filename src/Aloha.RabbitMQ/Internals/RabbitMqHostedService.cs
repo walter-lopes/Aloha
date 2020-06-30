@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Aloha.RabbitMQ.Internals
+namespace Aloha.MessageBrokers.RabbitMQ.Internals
 {
     internal sealed class RabbitMqHostedService : IHostedService
     {

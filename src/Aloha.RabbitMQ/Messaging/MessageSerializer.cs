@@ -3,7 +3,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
-namespace Aloha.RabbitMQ.Messaging
+namespace Aloha.MessageBrokers.RabbitMQ.Messaging
 {
     public class MessageSerializer
     {

@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Aloha.RabbitMQ.Conventions
+namespace Aloha.MessageBrokers.RabbitMQ.Conventions
 {
     class ConventionsBuilder : IConventionsBuilder
     {
