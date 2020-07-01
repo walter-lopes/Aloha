@@ -97,7 +97,7 @@ namespace Aloha.MessageBrokers.RabbitMQ.Subscribers
 
                     var message = _rabbitMqSerializer.Deserialize<T>(payload);
 
-                    Task Next(object m, object ctx, BasicDeliverEventArgs a) 
+                    Task Next(object m, object ctx, BasicDeliverEventArgs a)
                     => TryHandleAsync((T)m, messageId, correlationId, ctx, a, handle);
 
                     await _pluginsExecutor.ExecuteAsync(Next, message, null, args);
@@ -110,16 +110,20 @@ namespace Aloha.MessageBrokers.RabbitMQ.Subscribers
                 }
             };
 
+
+
             _channel.BasicConsume(conventions.Queue, false, consumer);
 
             return this;
-        }     
+        }
 
-        private async Task TryHandleAsync<TMessage>(TMessage message, 
-                                                    string messageId, 
-                                                    string correlationId,                                                   
-                                                    object messageContext, 
-                                                    BasicDeliverEventArgs args, 
+
+
+        private async Task TryHandleAsync<TMessage>(TMessage message,
+                                                    string messageId,
+                                                    string correlationId,
+                                                    object messageContext,
+                                                    BasicDeliverEventArgs args,
                                                     Func<IServiceProvider, TMessage, object, Task> handle)
         {
             var currentRetry = 0;
