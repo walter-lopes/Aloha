@@ -33,9 +33,8 @@ namespace Aloha.Services.Products.Controllers
                     await new ProductEventHandler().HandleAsync(@event);
                 });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 throw;
             }
          
