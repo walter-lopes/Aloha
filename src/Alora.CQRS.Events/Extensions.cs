@@ -1,8 +1,9 @@
 ﻿using Aloha;
 using System;
 using Microsoft.Extensions.DependencyInjection;
+using Aloha.CQRS.Events.Dispatchers;
 
-namespace Aloha.CQRS.Events.Extensions
+namespace Aloha.CQRS.Events
 {
     public static class Extensions
     {

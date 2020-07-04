@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Aloha.CQRS.Events
+namespace Aloha.CQRS.Events.Dispatchers
 {
     internal sealed class EventDispatcher : IEventDispatcher
     {

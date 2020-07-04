@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Aloha.MessageBrokers.RabbitMQ;
+using Aloha.CQRS.Commands;
 
 namespace Aloha.Services.Products
 {
@@ -31,6 +32,8 @@ namespace Aloha.Services.Products
 
             services
                 .AddAloha()
+                .AddCommandHandlers()
+                .AddInMemoryCommandDispatcher()
                 .AddRabbitMq()
                 .Build();
         }
