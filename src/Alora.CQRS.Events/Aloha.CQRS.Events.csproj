@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Aloha\Aloha.csproj" />
+    <ProjectReference Include="..\Aloha\Aloha.csproj" />
   </ItemGroup>
 
 </Project>
