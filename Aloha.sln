@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.CQRS.Commands", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.CQRS.Queries", "src\Aloha.CQRS.Queries\Aloha.CQRS.Queries.csproj", "{EF1C7C59-A3BC-4222-93FD-ACA2C87D4A29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.MessageBrokers.CQRS", "src\Aloha.MessageBrokers.CQRS\Aloha.MessageBrokers.CQRS.csproj", "{5092A6E0-7D96-40BE-BBBD-BD6D30AE6CB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{EF1C7C59-A3BC-4222-93FD-ACA2C87D4A29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF1C7C59-A3BC-4222-93FD-ACA2C87D4A29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF1C7C59-A3BC-4222-93FD-ACA2C87D4A29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5092A6E0-7D96-40BE-BBBD-BD6D30AE6CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5092A6E0-7D96-40BE-BBBD-BD6D30AE6CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5092A6E0-7D96-40BE-BBBD-BD6D30AE6CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5092A6E0-7D96-40BE-BBBD-BD6D30AE6CB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{A0447F34-DA4C-4DDD-8215-7979C1DF2B39} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 		{8C259A35-A008-4E26-AC15-BBE57A57C54D} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 		{EF1C7C59-A3BC-4222-93FD-ACA2C87D4A29} = {65DDED9C-3011-4225-BE10-C25442471F1D}
+		{5092A6E0-7D96-40BE-BBBD-BD6D30AE6CB7} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {764D7452-E2AD-4907-8F13-D1C2545421FC}
