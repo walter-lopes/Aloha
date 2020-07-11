@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Aloha.MessageBrokers.RabbitMQ;
 using Aloha.CQRS.Commands;
+using Aloha.MessageBrokers.CQRS;
+using Aloha.CQRS.Events;
 
 namespace Aloha.Services.Products
 {
@@ -34,6 +36,8 @@ namespace Aloha.Services.Products
                 .AddAloha()
                 .AddCommandHandlers()
                 .AddInMemoryCommandDispatcher()
+                .AddEventHandlers()
+                .AddServiceBusEventDispatcher()
                 .AddRabbitMq()
                 .Build();
         }
@@ -41,6 +45,10 @@ namespace Aloha.Services.Products
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            app.UseAloha()
+                .UseRabbitMq()
+                .SubscribeEvent<ProductCreated>();
+
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseEndpoints(endpoints =>

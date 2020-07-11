@@ -24,7 +24,7 @@ namespace Aloha.MessageBrokers.RabbitMQ
             Action<ConnectionFactory> connectionFactoryConfigurator = null)
         {
             builder.Services.AddSingleton<IContextProvider, ContextProvider>();
-            //builder.Services.AddSingleton<ICorrelationContextAccessor>(new CorrelationContextAccessor());
+            builder.Services.AddSingleton<ICorrelationContextAccessor>(new CorrelationContextAccessor());
             //builder.Services.AddSingleton<IMessagePropertiesAccessor>(new MessagePropertiesAccessor());
             builder.Services.AddSingleton<IConventionsBuilder, ConventionsBuilder>();
             builder.Services.AddSingleton<IConventionsProvider, ConventionsProvider>();

@@ -1,6 +1,6 @@
 ﻿using Aloha.CQRS.Commands;
 using Aloha.CQRS.Events;
-using Aloha.MessageBrokers.CQRS.Dispetchers;
+using Aloha.MessageBrokers.CQRS.Dispatchers;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
@@ -12,9 +12,9 @@ namespace Aloha.MessageBrokers.CQRS
             where TCommand : class, ICommand
             => busPublisher.PublishAsync(command, messageContext: messageContext);
 
-        public static Task PublishAsync<TEvent>(this IBusPublisher busPublisher, TEvent @event, object messsageContext)
+        public static Task PublishAsync<TEvent>(this IBusPublisher busPublisher, TEvent @event, object messageContext)
             where TEvent : class, IEvent
-            => busPublisher.PublishAsync(@event, messsageContext: messsageContext);
+            => busPublisher.PublishAsync(@event, messageContext: messageContext);
 
         public static IBusSubscriber SubscribeCommand<T>(this IBusSubscriber busSubscriber) where T : class, ICommand
             => busSubscriber.Subscribe<T>(async (serviceProvider, command, _) => 
