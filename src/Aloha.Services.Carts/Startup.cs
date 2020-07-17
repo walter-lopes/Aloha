@@ -1,19 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Aloha.CQRS.Commands;
-using Aloha.CQRS.Events;
-using Aloha.MessageBrokers.CQRS;
-using Aloha.MessageBrokers.RabbitMQ;
-using Aloha.Services.Carts.Events.External;
+using Aloha.CQRS.Commands.Dispatchers;
+using DryIoc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Aloha.Services.Carts
 {
@@ -26,27 +18,35 @@ namespace Aloha.Services.Carts
 
         public IConfiguration Configuration { get; }
 
+        private IContainer _container;
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            var mvcBuilder = services.AddControllers();
 
-            services
-               .AddAloha()
-               .AddCommandHandlers()
-               .AddInMemoryCommandDispatcher()
-               .AddEventHandlers()
-               .AddServiceBusEventDispatcher()
-               .AddRabbitMq()
-               .Build();
+            mvcBuilder.AddControllersAsServices();
+
+           
+
+        }
+
+        public void ConfigureContainer(IContainer container)
+        {
+          
+
+            container.AddAloha().AddCommandHandlers().AddInMemoryCommandDispatcher().Build();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseAloha()
-                .UseRabbitMq()
-                .SubscribeEvent<CustomerCreatedEvent>();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            var container = app.ApplicationServices.GetRequiredService<IContainer>();
 
             app.UseHttpsRedirection();
             app.UseRouting();
@@ -55,5 +55,15 @@ namespace Aloha.Services.Carts
                 endpoints.MapControllers();
             });
         }
+
+        public static IContainer CreateMyPreConfiguredContainer() =>
+           // This is an example configuration,
+           // for possible options check the https://github.com/dadhi/DryIoc/blob/master/docs/DryIoc.Docs/RulesAndDefaultConventions.md
+           new Container(rules =>
+
+               // Configures property injection for Controllers, ensure that you've added `AddControllersAsServices` in `ConfigureServices`
+               rules.With(propertiesAndFields: request =>
+                   request.ServiceType.Name.EndsWith("Controller") ? PropertiesAndFields.Properties()(request) : null)
+           );
     }
 }

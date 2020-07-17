@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Aloha.Services.Customers.Commands.Handlers
 {
-    public class CustomerCommandHandler : ICommandHandler<CreateCustomerCommand>
+    public class CustomerCommandHandler : ICommandHandler<CreateCustomerCommand>, 
+        ICommandHandler<UpdateCustomerCommand>
     {
         private readonly IEventDispatcher _dispatcher;
 
@@ -26,6 +27,13 @@ namespace Aloha.Services.Customers.Commands.Handlers
             var @event = new CustomerCreatedEvent() { CustomerId = customer.Id };
 
             await _dispatcher.PublishAsync(@event);
+        }
+
+        public Task HandleAsync(UpdateCustomerCommand command)
+        {
+            Console.WriteLine($"Updating customer: {command.Email}");
+
+            return Task.CompletedTask;
         }
     }
 }

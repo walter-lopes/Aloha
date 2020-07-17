@@ -1,4 +1,5 @@
 ﻿using Aloha.Types;
+using DryIoc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,7 @@ namespace Aloha
     {
         private const string SectionName = "app";
 
-        public static IAlohaBuilder AddAloha(this IServiceCollection services, string sectionName = SectionName)
+        public static IAlohaBuilder AddAloha(this IContainer services, string sectionName = SectionName)
         {
             if (string.IsNullOrWhiteSpace(sectionName))
             {
@@ -46,8 +47,8 @@ namespace Aloha
         public static TModel GetOptions<TModel>(this IAlohaBuilder builder, string settingsSectionName)
            where TModel : new()
         {
-            using var serviceProvider = builder.Services.BuildServiceProvider();
-            var configuration = serviceProvider.GetService<IConfiguration>();
+
+            var configuration = builder.Services.GetService<IConfiguration>();
             return configuration.GetOptions<TModel>(settingsSectionName);
         }
 

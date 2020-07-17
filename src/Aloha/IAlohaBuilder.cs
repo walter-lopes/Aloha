@@ -1,21 +1,17 @@
 ﻿using Aloha.Types;
-using Microsoft.Extensions.DependencyInjection;
+using DryIoc;
 using System;
 
 namespace Aloha
 {
     public interface IAlohaBuilder
     {
-        IServiceCollection Services { get; }
+        IContainer Services { get; }
 
-        bool TryRegister(string name);
-
-        void AddBuildAction(Action<IServiceProvider> execute);
-
-        void AddInitializer(IInitializer initializer);
+        void AddBuildAction(Action<IContainer> execute);
 
         void AddInitializer<TInitializer>() where TInitializer : IInitializer;
 
-        IServiceProvider Build();
+        IContainer Build();
     }
 }
