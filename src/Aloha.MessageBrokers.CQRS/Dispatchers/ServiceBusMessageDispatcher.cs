@@ -15,7 +15,6 @@ namespace Aloha.MessageBrokers.CQRS.Dispatchers
             _accessor = accessor;
         }
 
-
         public Task PublishAsync<T>(T @event) where T : class, IEvent 
             => _busPublisher.PublishAsync(@event, _accessor.CorrelationContext);
 

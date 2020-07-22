@@ -1,5 +1,4 @@
 ﻿using DryIoc;
-using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
 namespace Aloha.CQRS.Commands.Dispatchers
@@ -15,18 +14,8 @@ namespace Aloha.CQRS.Commands.Dispatchers
 
         public async Task SendAsync<T>(T command) where T : class, ICommand
         {
-            try
-            {
-                using var scope = _serviceFactory.CreateScope();
-                var handler = scope.ServiceProvider.GetRequiredService<ICommandHandler<T>>();
-                await handler.HandleAsync(command);
-            }
-            catch (System.Exception ex)
-            {
-
-                throw;
-            }
-           
+            var handler = _serviceFactory.Resolve<ICommandHandler<T>>();
+            await handler.HandleAsync(command);
         }
     }
 }

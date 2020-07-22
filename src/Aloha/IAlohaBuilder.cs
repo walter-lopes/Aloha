@@ -6,7 +6,7 @@ namespace Aloha
 {
     public interface IAlohaBuilder
     {
-        IContainer Services { get; }
+        IContainer Container { get; }
 
         void AddBuildAction(Action<IContainer> execute);
 

@@ -3,15 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="4.0.0" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\Aloha.CQRS.Commands\Aloha.CQRS.Commands.csproj" />
+    <ProjectReference Include="..\Aloha.MessageBrokers.CQRS\Aloha.MessageBrokers.CQRS.csproj" />
+    <ProjectReference Include="..\Aloha.RabbitMQ\Aloha.MessageBrokers.RabbitMQ.csproj" />
    
     <ProjectReference Include="..\Aloha\Aloha.csproj" />
+   
+    <ProjectReference Include="..\Alora.CQRS.Events\Aloha.CQRS.Events.csproj" />
   
   </ItemGroup>
 </Project>

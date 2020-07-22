@@ -20,7 +20,7 @@ namespace Aloha
             _services.Register<IStartupInitializer, StartupInitializer>();
         }
 
-        IContainer IAlohaBuilder.Services => _services;
+        IContainer IAlohaBuilder.Container => _services;
 
         public static IAlohaBuilder Create(IContainer services)
             => new AlohaBuilder(services);

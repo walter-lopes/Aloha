@@ -1,4 +1,5 @@
 ﻿using Aloha.MessageBrokers;
+using DryIoc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -12,7 +13,7 @@ namespace Aloha.MessageBrokers.RabbitMQ.Subscribers
 {
     public class RabbitMqSubscriber : IBusSubscriber
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IContainer _serviceProvider;
         private readonly IBusPublisher _publisher;
         private readonly IRabbitMqSerializer _rabbitMqSerializer;
         private readonly IConventionsProvider _conventionsProvider;
@@ -27,7 +28,7 @@ namespace Aloha.MessageBrokers.RabbitMQ.Subscribers
         private readonly RabbitMqOptions _options;
         private readonly RabbitMqOptions.QosOptions _qosOptions;
 
-        public RabbitMqSubscriber(IServiceProvider serviceProvider)
+        public RabbitMqSubscriber(IContainer serviceProvider)
         {
             _serviceProvider = serviceProvider;
             _channel = _serviceProvider.GetRequiredService<IConnection>().CreateModel();

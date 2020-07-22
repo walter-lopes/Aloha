@@ -33,22 +33,22 @@ namespace Aloha
             return builder;
         }
 
-        public static IApplicationBuilder UseAloha(this IApplicationBuilder app)
+        public static IContainer UseAloha(this IContainer container)
         {
-            using (var scope = app.ApplicationServices.CreateScope())
+            using (var scope = container.CreateScope())
             {
                 var initializer = scope.ServiceProvider.GetRequiredService<IStartupInitializer>();
                 Task.Run(() => initializer.InitializeAsync()).GetAwaiter().GetResult();
             }
 
-            return app;
+            return container;
         }
 
         public static TModel GetOptions<TModel>(this IAlohaBuilder builder, string settingsSectionName)
            where TModel : new()
         {
 
-            var configuration = builder.Services.GetService<IConfiguration>();
+            var configuration = builder.Container.GetService<IConfiguration>();
             return configuration.GetOptions<TModel>(settingsSectionName);
         }
 
