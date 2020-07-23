@@ -1,5 +1,6 @@
 using Aloha.CQRS.Commands;
 using Aloha.CQRS.Commands.Dispatchers;
+using Aloha.CQRS.Notifications;
 using Aloha.MessageBrokers.CQRS;
 using Aloha.MessageBrokers.RabbitMQ;
 using Aloha.Services.Carts.Events.External;
@@ -34,6 +35,7 @@ namespace Aloha.Services.Carts
                 .AddAloha()
                 .AddCommandHandlers()
                 .AddInMemoryCommandDispatcher()
+                .AddInMemoryNotificationDispatcher()
                 .AddRabbitMq()
                 .Build();
         }
