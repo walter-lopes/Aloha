@@ -1,8 +1,8 @@
 ﻿using Aloha.Types;
 using DryIoc;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 
 namespace Aloha
@@ -19,16 +19,16 @@ namespace Aloha
             }
 
             var builder = AlohaBuilder.Create(services);
-            //var options = builder.GetOptions<AppOptions>(sectionName);
-            //builder.Services.AddMemoryCache();
-            //services.AddSingleton(options);
-            //services.AddSingleton<IServiceId, ServiceId>();
-            //if (!options.DisplayBanner || string.IsNullOrWhiteSpace(options.Name))
-            //{
-            //    return builder;
-            //}
+            var options = builder.GetOptions<AppOptions>(sectionName);
+            services.UseInstance(options);
+            
+            if (!options.DisplayBanner || string.IsNullOrWhiteSpace(options.Name))
+            {
+                return builder;
+            }
 
-           
+            var version = options.DisplayVersion ? $" {options.Version}" : string.Empty;
+            Console.WriteLine(Figgle.FiggleFonts.Doom.Render($"{options.Name}{version}"));
 
             return builder;
         }

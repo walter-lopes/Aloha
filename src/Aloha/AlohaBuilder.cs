@@ -11,16 +11,16 @@ namespace Aloha
     {
         private readonly ConcurrentDictionary<string, bool> _registry = new ConcurrentDictionary<string, bool>();
         private readonly List<Action<IContainer>> _buildActions;
-        private readonly IContainer _services;
+        private readonly IContainer _container;
 
-        public AlohaBuilder(IContainer services)
+        public AlohaBuilder(IContainer container)
         {
             _buildActions = new List<Action<IContainer>>();
-            _services = services;
-            _services.Register<IStartupInitializer, StartupInitializer>();
+            _container = container;
+            _container.Register<IStartupInitializer, StartupInitializer>();
         }
 
-        IContainer IAlohaBuilder.Container => _services;
+        IContainer IAlohaBuilder.Container => _container;
 
         public static IAlohaBuilder Create(IContainer services)
             => new AlohaBuilder(services);
@@ -45,8 +45,8 @@ namespace Aloha
 
         public IContainer Build()
         {
-            _buildActions.ForEach(a => a(_services));
-            return _services;
+            _buildActions.ForEach(a => a(_container));
+            return _container;
         }
     }
 }
