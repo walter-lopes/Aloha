@@ -1,6 +1,5 @@
 ﻿using Aloha.MessageBrokers;
 using Microsoft.Extensions.Logging;
-using Polly;
 using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;

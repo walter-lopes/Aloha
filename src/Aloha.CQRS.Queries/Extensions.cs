@@ -10,14 +10,14 @@ namespace Aloha.CQRS.Queries
         public static IAlohaBuilder AddQueryHandlers(this IAlohaBuilder builder)
         {
             var assemblies = AppDomain.CurrentDomain.GetAssemblies()
-                                  .SelectMany(x => x.GetTypes())
-                                      .Where(t => t.GetInterfaces()
-                                          .Any(i => i.IsGenericType && i.GetGenericTypeDefinition().Equals(typeof(IQueryHandler<,>))))
-                                      .Select(x => x.Assembly);
+                                        .SelectMany(x => x.GetTypes())
+                                            .Where(t => t.GetInterfaces()
+                                            .Any(i => i.IsGenericType && i.GetGenericTypeDefinition().Equals(typeof(IQueryHandler<,>))))
+                                            .Select(x => x.Assembly);
 
 
             builder.Container.RegisterMany(assemblies,
-                                getServiceTypes: implType => implType.GetImplementedServiceTypes());
+                                        getServiceTypes: implType => implType.GetImplementedServiceTypes());
 
             return builder;
         }
