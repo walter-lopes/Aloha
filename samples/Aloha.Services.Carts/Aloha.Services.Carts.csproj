@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Aloha.CQRS.Commands\Aloha.CQRS.Commands.csproj" />
+    <ProjectReference Include="..\..\src\Aloha.CQRS.Queries\Aloha.CQRS.Queries.csproj" />
+    <ProjectReference Include="..\..\src\Aloha.MessageBrokers.CQRS\Aloha.MessageBrokers.CQRS.csproj" />
+    <ProjectReference Include="..\..\src\Aloha.MessageBrokers\Aloha.MessageBrokers.csproj" />
+    <ProjectReference Include="..\..\src\Aloha.RabbitMQ\Aloha.MessageBrokers.RabbitMQ.csproj" />
+    <ProjectReference Include="..\..\src\Aloha\Aloha.csproj" />
+    <ProjectReference Include="..\..\src\Alora.CQRS.Events\Aloha.CQRS.Events.csproj" />
+  </ItemGroup>
+
+
+</Project>
