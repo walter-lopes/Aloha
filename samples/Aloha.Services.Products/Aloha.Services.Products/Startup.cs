@@ -1,13 +1,11 @@
-﻿using Aloha.MessageBrokers.RabbitMQ.Messaging;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Aloha.MessageBrokers.RabbitMQ;
 using Aloha.CQRS.Commands;
 using Aloha.MessageBrokers.CQRS;
 using Aloha.CQRS.Events;
+using DryIoc;
 
 namespace Aloha.Services.Products
 {
@@ -23,17 +21,14 @@ namespace Aloha.Services.Products
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var configSection = Configuration.GetSection("RabbitMQ");
-            string host = configSection["Host"];
-            string userName = configSection["UserName"];
-            string password = configSection["Password"];
+            var mvcBuilder = services.AddControllers();
+            mvcBuilder.AddControllersAsServices();
+        }
 
-
-            services.AddControllers();
-
-
-            services
-                .AddAloha()
+        public void ConfigureContainer(IContainer container)
+        {
+            container
+               .AddAloha()
                 .AddCommandHandlers()
                 .AddInMemoryCommandDispatcher()
                 .AddEventHandlers()
@@ -45,7 +40,10 @@ namespace Aloha.Services.Products
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            app.UseAloha()
+            var container = app.ApplicationServices.GetRequiredService<IContainer>();
+
+            container
+                .UseAloha()
                 .UseRabbitMq()
                 .SubscribeEvent<ProductCreated>();
 
@@ -56,5 +54,11 @@ namespace Aloha.Services.Products
                 endpoints.MapControllers();
             });
         }
+
+        public static IContainer CreateMyPreConfiguredContainer() =>
+         new Container(rules =>
+             rules.With(propertiesAndFields: request =>
+                 request.ServiceType.Name.EndsWith("Controller") ? PropertiesAndFields.Properties()(request) : null)
+         );
     }
 }

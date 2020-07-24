@@ -1,4 +1,5 @@
 ﻿using Aloha.Types;
+using DryIoc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,7 @@ namespace Aloha
     {
         private const string SectionName = "app";
 
-        public static IAlohaBuilder AddAloha(this IServiceCollection services, string sectionName = SectionName)
+        public static IAlohaBuilder AddAloha(this IContainer services, string sectionName = SectionName)
         {
             if (string.IsNullOrWhiteSpace(sectionName))
             {
@@ -32,22 +33,22 @@ namespace Aloha
             return builder;
         }
 
-        public static IApplicationBuilder UseAloha(this IApplicationBuilder app)
+        public static IContainer UseAloha(this IContainer container)
         {
-            using (var scope = app.ApplicationServices.CreateScope())
+            using (var scope = container.CreateScope())
             {
                 var initializer = scope.ServiceProvider.GetRequiredService<IStartupInitializer>();
                 Task.Run(() => initializer.InitializeAsync()).GetAwaiter().GetResult();
             }
 
-            return app;
+            return container;
         }
 
         public static TModel GetOptions<TModel>(this IAlohaBuilder builder, string settingsSectionName)
            where TModel : new()
         {
-            using var serviceProvider = builder.Services.BuildServiceProvider();
-            var configuration = serviceProvider.GetService<IConfiguration>();
+
+            var configuration = builder.Container.GetService<IConfiguration>();
             return configuration.GetOptions<TModel>(settingsSectionName);
         }
 

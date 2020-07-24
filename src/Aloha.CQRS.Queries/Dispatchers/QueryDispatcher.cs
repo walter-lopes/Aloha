@@ -1,20 +1,21 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DryIoc;
+using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
 namespace Aloha.CQRS.Queries.Dispatchers
 {
     internal sealed class QueryDispatcher : IQueryDispatcher
     {
-        private readonly IServiceScopeFactory _serviceFactory;
+        private readonly IContainer _container;
 
-        public QueryDispatcher(IServiceScopeFactory serviceFactory)
+        public QueryDispatcher(IContainer container)
         {
-            _serviceFactory = serviceFactory;
+            _container = container;
         }
 
         public async Task<TResult> QueryAsync<TResult>(IQuery<TResult> query)
         {
-            using var scope = _serviceFactory.CreateScope();
+            using var scope = _container.CreateScope();
             var handlerType = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TResult));
             dynamic handler = scope.ServiceProvider.GetRequiredService(handlerType);
             return await handler.HandleAsync((dynamic)query);
@@ -22,7 +23,7 @@ namespace Aloha.CQRS.Queries.Dispatchers
 
         public async Task<TResult> QueryAsync<TQuery, TResult>(TQuery query) where TQuery : class, IQuery<TResult>
         {
-            using var scope = _serviceFactory.CreateScope();
+            using var scope = _container.CreateScope();
             var handler = scope.ServiceProvider.GetRequiredService<IQueryHandler<TQuery, TResult>>();
             return await handler.HandleAsync(query);
         }

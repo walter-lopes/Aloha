@@ -1,4 +1,5 @@
-﻿using Aloha.CQRS.Events;
+﻿
+using Aloha.CQRS.Events;
 using System;
 using System.Threading.Tasks;
 

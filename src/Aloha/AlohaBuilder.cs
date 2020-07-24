@@ -1,4 +1,5 @@
 ﻿using Aloha.Types;
+using DryIoc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Concurrent;
@@ -9,30 +10,28 @@ namespace Aloha
     public class AlohaBuilder : IAlohaBuilder
     {
         private readonly ConcurrentDictionary<string, bool> _registry = new ConcurrentDictionary<string, bool>();
-        private readonly List<Action<IServiceProvider>> _buildActions;
-        private readonly IServiceCollection _services;
+        private readonly List<Action<IContainer>> _buildActions;
+        private readonly IContainer _services;
 
-        public AlohaBuilder(IServiceCollection services)
+        public AlohaBuilder(IContainer services)
         {
-            _buildActions = new List<Action<IServiceProvider>>();
+            _buildActions = new List<Action<IContainer>>();
             _services = services;
-            _services.AddSingleton<IStartupInitializer>(new StartupInitializer());
+            _services.Register<IStartupInitializer, StartupInitializer>();
         }
 
-        IServiceCollection IAlohaBuilder.Services => _services;
+        IContainer IAlohaBuilder.Container => _services;
 
-        public static IAlohaBuilder Create(IServiceCollection services)
+        public static IAlohaBuilder Create(IContainer services)
             => new AlohaBuilder(services);
 
-        public bool TryRegister(string name) => _registry.TryAdd(name, true);
-
-        public void AddBuildAction(Action<IServiceProvider> execute)
+        public void AddBuildAction(Action<IContainer> execute)
             => _buildActions.Add(execute);
 
         public void AddInitializer(IInitializer initializer)
-            => AddBuildAction(sp =>
+            => AddBuildAction(container =>
             {
-                var startupInitializer = sp.GetService<IStartupInitializer>();
+                var startupInitializer = container.GetService<IStartupInitializer>();
                 startupInitializer.AddInitializer(initializer);
             });
 
@@ -44,11 +43,10 @@ namespace Aloha
                 startupInitializer.AddInitializer(initializer);
             });
 
-        public IServiceProvider Build()
+        public IContainer Build()
         {
-            var serviceProvider = _services.BuildServiceProvider();
-            _buildActions.ForEach(a => a(serviceProvider));
-            return serviceProvider;
+            _buildActions.ForEach(a => a(_services));
+            return _services;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Aloha.CQRS.Events;
+﻿
+using Aloha.CQRS.Events;
 using Aloha.MessageBrokers;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,6 @@ namespace Aloha.Services.Carts.Events.External
     public class CustomerCreatedEvent : IEvent
     {
         public Guid CustomerId { get; set; }
-        public Guid MessageId { get;  set ; }
+        public Guid MessageId { get; set; }
     }
 }
