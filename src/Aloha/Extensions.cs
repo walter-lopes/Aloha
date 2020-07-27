@@ -1,7 +1,8 @@
 ﻿using Aloha.Types;
-using Microsoft.AspNetCore.Builder;
+using DryIoc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 
 namespace Aloha
@@ -10,7 +11,7 @@ namespace Aloha
     {
         private const string SectionName = "app";
 
-        public static IAlohaBuilder AddAloha(this IServiceCollection services, string sectionName = SectionName)
+        public static IAlohaBuilder AddAloha(this IContainer services, string sectionName = SectionName)
         {
             if (string.IsNullOrWhiteSpace(sectionName))
             {
@@ -18,36 +19,36 @@ namespace Aloha
             }
 
             var builder = AlohaBuilder.Create(services);
-            //var options = builder.GetOptions<AppOptions>(sectionName);
-            //builder.Services.AddMemoryCache();
-            //services.AddSingleton(options);
-            //services.AddSingleton<IServiceId, ServiceId>();
-            //if (!options.DisplayBanner || string.IsNullOrWhiteSpace(options.Name))
-            //{
-            //    return builder;
-            //}
+            var options = builder.GetOptions<AppOptions>(sectionName);
+            services.UseInstance(options);
+            
+            if (!options.DisplayBanner || string.IsNullOrWhiteSpace(options.Name))
+            {
+                return builder;
+            }
 
-           
+            var version = options.DisplayVersion ? $" {options.Version}" : string.Empty;
+            Console.WriteLine(Figgle.FiggleFonts.Doom.Render($"{options.Name}{version}"));
 
             return builder;
         }
 
-        public static IApplicationBuilder UseAloha(this IApplicationBuilder app)
+        public static IContainer UseAloha(this IContainer container)
         {
-            using (var scope = app.ApplicationServices.CreateScope())
+            using (var scope = container.CreateScope())
             {
                 var initializer = scope.ServiceProvider.GetRequiredService<IStartupInitializer>();
                 Task.Run(() => initializer.InitializeAsync()).GetAwaiter().GetResult();
             }
 
-            return app;
+            return container;
         }
 
         public static TModel GetOptions<TModel>(this IAlohaBuilder builder, string settingsSectionName)
            where TModel : new()
         {
-            using var serviceProvider = builder.Services.BuildServiceProvider();
-            var configuration = serviceProvider.GetService<IConfiguration>();
+
+            var configuration = builder.Container.GetService<IConfiguration>();
             return configuration.GetOptions<TModel>(settingsSectionName);
         }
 

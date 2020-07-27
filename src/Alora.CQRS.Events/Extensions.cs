@@ -1,7 +1,7 @@
-﻿using Aloha;
-using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System;
 using Aloha.CQRS.Events.Dispatchers;
+using System.Linq;
+using DryIoc;
 
 namespace Aloha.CQRS.Events
 {
@@ -9,18 +9,22 @@ namespace Aloha.CQRS.Events
     {
         public static IAlohaBuilder AddEventHandlers(this IAlohaBuilder builder)
         {
-            builder.Services.Scan(s =>
-                s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
-                    .AddClasses(c => c.AssignableTo(typeof(IEventHandler<>)))
-                    .AsImplementedInterfaces()
-                    .WithTransientLifetime());
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+                                       .SelectMany(x => x.GetTypes())
+                                            .Where(t => t.GetInterfaces()
+                                            .Any(i => i.IsGenericType && i.GetGenericTypeDefinition().Equals(typeof(IEventHandler<>))))
+                                            .Select(x => x.Assembly);
+
+
+            builder.Container.RegisterMany(assemblies,
+                                            getServiceTypes: implType => implType.GetImplementedServiceTypes());
 
             return builder;
         }
 
         public static IAlohaBuilder AddInMemoryEventDispatcher(this IAlohaBuilder builder)
         {
-            builder.Services.AddSingleton<IEventDispatcher, EventDispatcher>();
+            builder.Container.Register<IEventDispatcher, EventDispatcher>(Reuse.Scoped);
             return builder;
         }
     }

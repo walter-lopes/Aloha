@@ -6,6 +6,7 @@ using Aloha.CQRS.Commands;
 using Aloha.CQRS.Events;
 using Aloha.MessageBrokers.CQRS;
 using Aloha.MessageBrokers.RabbitMQ;
+using DryIoc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,12 +26,15 @@ namespace Aloha.Services.Customers
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            var mvcBuilder = services.AddControllers();
+            mvcBuilder.AddControllersAsServices();
+        }
 
-            services
+        public void ConfigureContainer(IContainer container)
+        {
+            container
                 .AddAloha()
                 .AddCommandHandlers()
                 .AddInMemoryCommandDispatcher()
@@ -48,6 +52,8 @@ namespace Aloha.Services.Customers
                 app.UseDeveloperExceptionPage();
             }
 
+            var container = app.ApplicationServices.GetRequiredService<IContainer>();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -57,5 +63,11 @@ namespace Aloha.Services.Customers
                 endpoints.MapControllers();
             });
         }
+
+        public static IContainer CreateMyPreConfiguredContainer() =>
+          new Container(rules =>
+              rules.With(propertiesAndFields: request =>
+                  request.ServiceType.Name.EndsWith("Controller") ? PropertiesAndFields.Properties()(request) : null)
+          );
     }
 }
