@@ -8,4 +8,8 @@
     <PackageReference Include="AWSSDK.S3" Version="3.3.111.30" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Aloha\Aloha.csproj" />
+  </ItemGroup>
+
 </Project>

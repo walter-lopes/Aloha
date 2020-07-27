@@ -14,11 +14,6 @@ namespace Aloha.Storages.AmazonS3
 
         public AmazonS3Client(IAmazonS3 amazonS3) => _amazonS3 = amazonS3;
 
-        public AmazonS3Client()
-        {
-
-        }
-
         public async Task<string> CreateAsync(string bucketName, string domain = "")
         {
             try
@@ -123,8 +118,8 @@ namespace Aloha.Storages.AmazonS3
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _amazonS3.Dispose();
+            GC.SuppressFinalize(this);
         }
-
     }
 }
