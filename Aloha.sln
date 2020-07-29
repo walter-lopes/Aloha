@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.Storages.AmazonS3", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.Services.Carts", "src\Aloha.Services.Carts\Aloha.Services.Carts.csproj", "{AA334C2D-CA2C-411C-B09F-A329E5E72670}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.MessageBrokers.AmazonSQS", "src\Aloha.MessageBrokers.AmazonSQS\Aloha.MessageBrokers.AmazonSQS.csproj", "{D794D778-A998-4702-9D59-D98EFF9C917D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{AA334C2D-CA2C-411C-B09F-A329E5E72670}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA334C2D-CA2C-411C-B09F-A329E5E72670}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA334C2D-CA2C-411C-B09F-A329E5E72670}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D794D778-A998-4702-9D59-D98EFF9C917D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D794D778-A998-4702-9D59-D98EFF9C917D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D794D778-A998-4702-9D59-D98EFF9C917D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D794D778-A998-4702-9D59-D98EFF9C917D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +101,7 @@ Global
 		{C8BC62E2-102C-4487-988B-AB349676FFD0} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 		{6612A724-6A74-43F4-A377-48C3CE049712} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 		{AA334C2D-CA2C-411C-B09F-A329E5E72670} = {6CEBED5A-5E6D-43C6-BBF1-14EAFD09E603}
+		{D794D778-A998-4702-9D59-D98EFF9C917D} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {764D7452-E2AD-4907-8F13-D1C2545421FC}
