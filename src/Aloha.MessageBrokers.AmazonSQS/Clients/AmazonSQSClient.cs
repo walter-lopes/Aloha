@@ -122,6 +122,20 @@ namespace Aloha.MessageBrokers.AmazonSQS.Clients
             return true;
         }
 
+        public async Task<bool> EnqueueAsync<T>(T obj, string queue = "")
+        {
+            var queueEndpoint = GetQueueEndpoint(queue);
+
+            string objJson = _serializer.Serialize(obj);
+
+            SendMessageResponse messageResponse = await _amazonSQS.SendMessageAsync(queueEndpoint, objJson);
+
+            if (messageResponse.HttpStatusCode != HttpStatusCode.OK)
+                throw new Exception($"Error sending message. HttpStatusCode: {messageResponse.HttpStatusCode}");
+
+            return true;
+        }
+
         public async Task<IEnumerable<MessageEntry<T>>> ReceiveMessageAsync<T>(string queue = "", int maxItems = 1, int timeoutSeconds = 0)
         {
             var queueEndpoint = GetQueueEndpoint(queue);
