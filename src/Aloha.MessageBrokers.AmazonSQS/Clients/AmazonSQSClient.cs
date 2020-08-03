@@ -154,7 +154,7 @@ namespace Aloha.MessageBrokers.AmazonSQS.Clients
             receives.Messages?.ForEach(message =>
             {
                 T messageObj =   _serializer.Deserialize<T>(message.Body);
-                responses.Add(new MessageEntry<T> { Id = message.MessageId, Message = messageObj, ReceiptHandle = message.ReceiptHandle });
+                responses.Add(new MessageEntry<T>(message.MessageId, messageObj, message.ReceiptHandle));
             });
 
             return responses;
