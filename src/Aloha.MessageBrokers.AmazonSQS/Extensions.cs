@@ -1,6 +1,7 @@
 ﻿using Aloha.MessageBrokers.AmazonSQS.Clients;
 using Aloha.MessageBrokers.AmazonSQS.Conventions;
 using Aloha.MessageBrokers.AmazonSQS.Publishers;
+using Aloha.Serializers;
 using DryIoc;
 
 namespace Aloha.MessageBrokers.AmazonSQS
@@ -11,10 +12,12 @@ namespace Aloha.MessageBrokers.AmazonSQS
 
         public static IAlohaBuilder AddAmazonSQS(this IAlohaBuilder builder, string sectionName = SectionName)
         {
+            builder.Container.Register<ICorrelationContextAccessor, CorrelationContextAccessor>(reuse: Reuse.Singleton);
             builder.Container.Register<IAmazonSQSClient, AmazonSQSClient>();
             builder.Container.Register<IConventions, MessageConventions>();
             builder.Container.Register<IConventionsProvider, ConventionsProvider>();          
             builder.Container.Register<IBusPublisher, AmazonSQSPublisher>();
+            builder.Container.Register<IAlohaSerializer, NewtonsoftJsonAlohaSerializer>();
 
             var options = builder.GetOptions<AmazonSQSOptions>(sectionName);
             builder.Container.RegisterInstance(options);

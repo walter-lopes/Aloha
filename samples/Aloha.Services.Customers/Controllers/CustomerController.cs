@@ -21,9 +21,9 @@ namespace Aloha.Services.Customers.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] CreateCustomerCommand command)
+        public async Task<IActionResult> Post([FromBody] CreateCustomerCommand command)
         {
-            _dispatcher.SendAsync(command);
+            await _dispatcher.SendAsync(command);
 
             return Accepted();
         }
