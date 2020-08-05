@@ -1,4 +1,5 @@
 ﻿using Aloha.MessageBrokers.AmazonSQS.Messages;
+using Amazon.Runtime;
 using Amazon.SQS;
 using Amazon.SQS.Model;
 using System;
@@ -15,9 +16,12 @@ namespace Aloha.MessageBrokers.AmazonSQS.Clients
         private readonly IAmazonSQS _amazonSQS;
         private readonly IAlohaSerializer _serializer;
 
-        public AmazonSQSClient(IAmazonSQS amazonSQS, AmazonSQSOptions options, IAlohaSerializer serializer)
+        public AmazonSQSClient(AmazonSQSOptions options, IAlohaSerializer serializer)
         {
-            _amazonSQS = amazonSQS;
+            _amazonSQS = new Amazon.SQS.AmazonSQSClient(
+                                new BasicAWSCredentials(options.AccessKey, options.SecretKey),
+                                new AmazonSQSConfig { ServiceURL = options.ServiceUrl });
+
             _options = options;
             _serializer = serializer;
         }
@@ -53,7 +57,7 @@ namespace Aloha.MessageBrokers.AmazonSQS.Clients
                     objIndex = messagesCount + currentMessagesCount;
                 }
 
-                DeleteMessageBatchRequest request = new DeleteMessageBatchRequest(queueEndpoint, requests);
+                var request = new DeleteMessageBatchRequest(queueEndpoint, requests);
                 responseTasks.Add(_amazonSQS.DeleteMessageBatchAsync(request));
 
                 messagesCount += requests.Count;

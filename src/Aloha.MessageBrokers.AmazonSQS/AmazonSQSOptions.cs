@@ -10,6 +10,8 @@ namespace Aloha.MessageBrokers.AmazonSQS
 
         public string Endpoint { get; set; }
 
+        public string ServiceUrl { get; set; }
+
         public IDictionary<string, string> Queues { get; set; }
     }
 }
