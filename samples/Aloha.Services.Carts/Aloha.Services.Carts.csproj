@@ -8,6 +8,7 @@
     <ProjectReference Include="..\..\src\Aloha.CQRS.Commands\Aloha.CQRS.Commands.csproj" />
     <ProjectReference Include="..\..\src\Aloha.CQRS.Notifications\Aloha.CQRS.Notifications.csproj" />
     <ProjectReference Include="..\..\src\Aloha.CQRS.Queries\Aloha.CQRS.Queries.csproj" />
+    <ProjectReference Include="..\..\src\Aloha.MessageBrokers.AmazonSQS\Aloha.MessageBrokers.AmazonSQS.csproj" />
     <ProjectReference Include="..\..\src\Aloha.MessageBrokers.CQRS\Aloha.MessageBrokers.CQRS.csproj" />
     <ProjectReference Include="..\..\src\Aloha.RabbitMQ\Aloha.MessageBrokers.RabbitMQ.csproj" />
     <ProjectReference Include="..\..\src\Alora.CQRS.Events\Aloha.CQRS.Events.csproj" />

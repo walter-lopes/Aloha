@@ -49,7 +49,7 @@ namespace Aloha.MessageBrokers.RabbitMQ.Subscribers
             }
         }
 
-        public IBusSubscriber Subscribe<T>(Func<IServiceProvider, T, object, Task> handle) where T : class
+        public async Task<IBusSubscriber> Subscribe<T>(Func<IServiceProvider, T, object, Task> handle) where T : class
         {
             var conventions = _conventionsProvider.Get<T>();
             var declare = _options.Queue?.Declare ?? true;
@@ -110,8 +110,6 @@ namespace Aloha.MessageBrokers.RabbitMQ.Subscribers
                     throw;
                 }
             };
-
-
 
             _channel.BasicConsume(conventions.Queue, false, consumer);
 

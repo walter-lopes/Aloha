@@ -1,6 +1,7 @@
 ﻿using Aloha.MessageBrokers.AmazonSQS.Clients;
 using Aloha.MessageBrokers.AmazonSQS.Conventions;
 using Aloha.MessageBrokers.AmazonSQS.Publishers;
+using Aloha.MessageBrokers.AmazonSQS.Subscribers;
 using Aloha.Serializers;
 using DryIoc;
 
@@ -24,5 +25,8 @@ namespace Aloha.MessageBrokers.AmazonSQS
 
             return builder;
         }
+
+        public static IBusSubscriber UseAmazonSQS(this IContainer container)
+            => new AmazonSQSSubscriber(container);
     }
 }

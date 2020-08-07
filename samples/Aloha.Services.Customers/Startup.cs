@@ -6,6 +6,7 @@ using Aloha.CQRS.Commands;
 using Aloha.CQRS.Events;
 using Aloha.MessageBrokers.AmazonSQS;
 using Aloha.MessageBrokers.CQRS;
+using Aloha.MessageBrokers.RabbitMQ;
 using DryIoc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

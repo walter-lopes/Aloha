@@ -18,14 +18,14 @@ namespace Aloha.MessageBrokers.CQRS
             => busPublisher.PublishAsync(@event, messageContext: messageContext);
 
         public static IBusSubscriber SubscribeCommand<T>(this IBusSubscriber busSubscriber) where T : class, ICommand
-            => busSubscriber.Subscribe<T>(async (serviceProvider, command, _) => 
+            => (IBusSubscriber)busSubscriber.Subscribe<T>(async (serviceProvider, command, _) => 
             {
                 using var scope = serviceProvider.CreateScope();
                 await scope.ServiceProvider.GetRequiredService<ICommandHandler<T>>().HandleAsync(command);
             });
 
         public static IBusSubscriber SubscribeEvent<T>(this IBusSubscriber busSubscriber) where T : class, IEvent
-            => busSubscriber.Subscribe<T>(async (serviceProvider, @event, _) =>
+            => (IBusSubscriber)busSubscriber.Subscribe<T>(async (serviceProvider, @event, _) =>
             {
                 using var scope = serviceProvider.CreateScope();
                 await scope.ServiceProvider.GetRequiredService<IEventHandler<T>>().HandleAsync(@event);
