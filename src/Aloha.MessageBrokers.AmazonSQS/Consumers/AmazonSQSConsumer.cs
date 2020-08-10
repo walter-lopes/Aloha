@@ -1,31 +1,30 @@
 ﻿using DryIoc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Aloha.MessageBrokers.AmazonSQS.Subscribers
+namespace Aloha.MessageBrokers.AmazonSQS.Consumers
 {
-    public class AmazonSQSSubscriber : IBusSubscriber
+    public class AmazonSQSConsumer : IBusConsumer
     {
         private readonly IContainer _container;
         private readonly IAmazonSQSClient _amazonSQSClient;
         private readonly IConventionsProvider _conventions;
 
-        public AmazonSQSSubscriber(IContainer container)
+        public AmazonSQSConsumer(IContainer container)
         {
             _container = container;
             _amazonSQSClient = _container.GetRequiredService<IAmazonSQSClient>();
             _conventions = _container.GetRequiredService<IConventionsProvider>();
         }
 
-        public async Task<IBusSubscriber> Subscribe<T>(Func<IServiceProvider, T, object, Task> handle) where T : class
+        public async Task<IBusConsumer> Consume<T>(Func<IServiceProvider, IEnumerable<T>, object, Task> handle) where T : class
         {
-            var entries = await _amazonSQSClient.ReceiveMessageAsync<T>(_conventions.Get<T>().Queue, 1);
+            var entries = await _amazonSQSClient.ReceiveMessageAsync<T>(_conventions.Get<T>().Queue);
 
-            var message = entries.FirstOrDefault().Message;
-
-            await handle(_container, message, null);
+            await handle(_container, entries.Select(x => x.Message), null);
 
             return this;
         }

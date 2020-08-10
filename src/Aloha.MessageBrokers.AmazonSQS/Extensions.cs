@@ -1,4 +1,5 @@
 ﻿using Aloha.MessageBrokers.AmazonSQS.Clients;
+using Aloha.MessageBrokers.AmazonSQS.Consumers;
 using Aloha.MessageBrokers.AmazonSQS.Conventions;
 using Aloha.MessageBrokers.AmazonSQS.Publishers;
 using Aloha.MessageBrokers.AmazonSQS.Subscribers;
@@ -18,6 +19,7 @@ namespace Aloha.MessageBrokers.AmazonSQS
             builder.Container.Register<IConventions, MessageConventions>();
             builder.Container.Register<IConventionsProvider, ConventionsProvider>();          
             builder.Container.Register<IBusPublisher, AmazonSQSPublisher>();
+            builder.Container.Register<IBusConsumer, AmazonSQSConsumer>();
             builder.Container.Register<IAlohaSerializer, NewtonsoftJsonAlohaSerializer>();
 
             var options = builder.GetOptions<AmazonSQSOptions>(sectionName);
