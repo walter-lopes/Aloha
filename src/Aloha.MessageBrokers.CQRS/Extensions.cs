@@ -3,6 +3,8 @@ using Aloha.CQRS.Events;
 using Aloha.MessageBrokers.CQRS.Dispatchers;
 using DryIoc;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Aloha.MessageBrokers.CQRS
@@ -30,6 +32,14 @@ namespace Aloha.MessageBrokers.CQRS
                 using var scope = serviceProvider.CreateScope();
                 await scope.ServiceProvider.GetRequiredService<IEventHandler<T>>().HandleAsync(@event);
             });
+
+        public static IBusConsumer ConsumeCommand<T>(this IBusConsumer busConsumer) where T : class, ICommand
+            => (IBusConsumer)busConsumer.Consume<T>(async (serviceProvider, command, _) =>
+           {
+               using var scope = serviceProvider.CreateScope();
+               await scope.ServiceProvider.GetRequiredService<IBatchCommandHandler<T>>().HandleAsync(command);
+           });
+
 
         public static IAlohaBuilder AddServiceBusCommandDispatcher(this IAlohaBuilder builder)
         {
