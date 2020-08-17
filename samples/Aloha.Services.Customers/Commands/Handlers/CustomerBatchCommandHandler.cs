@@ -7,9 +7,11 @@ namespace Aloha.Services.Customers.Commands.Handlers
 {
     public class CustomerBatchCommandHandler : IBatchCommandHandler<CreateCustomerCommand>
     {
-        public Task HandleAsync(IEnumerable<CreateCustomerCommand> commands)
+        public Task HandleAsync(IEnumerable<CreateCustomerCommand> commands, Func<IEnumerable<CreateCustomerCommand>, Task> onError)
         {
-            throw new NotImplementedException();
+            onError(commands);
+
+            return Task.CompletedTask;
         }
     }
 }

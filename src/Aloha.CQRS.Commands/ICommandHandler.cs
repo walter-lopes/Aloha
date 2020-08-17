@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Aloha.CQRS.Commands
@@ -8,8 +9,8 @@ namespace Aloha.CQRS.Commands
         Task HandleAsync(TCommand command);
     }
 
-    public interface IBatchCommandHandler<in TCommand> where TCommand : class, ICommand
+    public interface IBatchCommandHandler<TCommand> where TCommand : class, ICommand
     {
-        Task HandleAsync(IEnumerable<TCommand> commands);
+        Task HandleAsync(IEnumerable<TCommand> commands, Func<IEnumerable<TCommand>, Task> onError = null);
     }
 }

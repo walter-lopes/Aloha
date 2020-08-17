@@ -20,13 +20,21 @@ namespace Aloha.MessageBrokers.AmazonSQS.Consumers
             _conventions = _container.GetRequiredService<IConventionsProvider>();
         }
 
-        public async Task<IBusConsumer> Consume<T>(Func<IServiceProvider, IEnumerable<T>, object, Task> handle) where T : class
+        public async Task<IBusConsumer> Consume<T>(Func<IServiceProvider, IEnumerable<T>, object, Func<IEnumerable<T>, Task>, Task> handle) where T : class
         {
-            var entries = await _amazonSQSClient.ReceiveMessageAsync<T>(_conventions.Get<T>().Queue);
+            var queue = _conventions.Get<T>().Queue;
 
-            await handle(_container, entries.Select(x => x.Message), null);
+            var entries = await _amazonSQSClient.ReceiveMessageAsync<T>(queue);
+
+            await handle(_container, entries.Select(x => x.Message), null, ProcessErrorMessage);
 
             return this;
+        }
+
+
+        private Task ProcessErrorMessage<T>(IEnumerable<T> errors) where T : class
+        {
+            return Task.CompletedTask;
         }
     }
 }

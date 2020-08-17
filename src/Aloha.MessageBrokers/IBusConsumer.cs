@@ -7,6 +7,6 @@ namespace Aloha.MessageBrokers
 {
     public interface IBusConsumer
     {
-        Task<IBusConsumer> Consume<T>(Func<IServiceProvider, IEnumerable<T>, object, Task> handle) where T : class;
+        Task<IBusConsumer> Consume<T>(Func<IServiceProvider, IEnumerable<T>, object, Func<IEnumerable<T>, Task>, Task> handle) where T : class;
     }
 }

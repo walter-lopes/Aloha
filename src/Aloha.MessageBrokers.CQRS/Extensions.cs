@@ -34,10 +34,10 @@ namespace Aloha.MessageBrokers.CQRS
             });
 
         public static IBusConsumer ConsumeCommand<T>(this IBusConsumer busConsumer) where T : class, ICommand
-            => (IBusConsumer)busConsumer.Consume<T>(async (serviceProvider, command, _) =>
+            => (IBusConsumer)busConsumer.Consume<T>(async (serviceProvider, commands, _, onError) =>
            {
                using var scope = serviceProvider.CreateScope();
-               await scope.ServiceProvider.GetRequiredService<IBatchCommandHandler<T>>().HandleAsync(command);
+               await scope.ServiceProvider.GetRequiredService<IBatchCommandHandler<T>>().HandleAsync(commands, onError);
            });
 
 
