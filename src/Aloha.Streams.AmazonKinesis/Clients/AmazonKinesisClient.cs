@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Aloha.Streams.AmazonKinesis.Clients
 {
-    public class AmazonKinesisClient
+    public class AmazonKinesisClient : IAmazonKinesisClient
     {
         private readonly IAmazonKinesisFirehose _client;
         private readonly IAlohaSerializer _serializer;
