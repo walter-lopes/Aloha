@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Aloha.Streams.AmazonKinesis
 {
@@ -12,6 +11,6 @@ namespace Aloha.Streams.AmazonKinesis
 
         public string Region { get; set; }
 
-        public IDictionary<string, string> Queues { get; set; }
+        public IDictionary<string, string> Streams { get; set; }
     }
 }

@@ -5,12 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.KinesisFirehose" Version="3.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Aloha.Streams\Aloha.Streams.csproj" />
-    <ProjectReference Include="..\Aloha\Aloha.csproj" />
+    <ProjectReference Include="..\Alora.CQRS.Events\Aloha.CQRS.Events.csproj" />
   </ItemGroup>
 
 </Project>

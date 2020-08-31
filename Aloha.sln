@@ -33,7 +33,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.Services.Customers", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.Services.Carts", "samples\Aloha.Services.Carts\Aloha.Services.Carts.csproj", "{CFA67D3E-A09B-4242-A638-3215134F5983}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.Streams.AmazonKinesis", "src\Aloha.Streams.AmazonKinesis\Aloha.Streams.AmazonKinesis.csproj", "{AA88D259-5949-46A5-A04C-5B78E3BAC948}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.Streams.AmazonKinesis", "src\Aloha.Streams.AmazonKinesis\Aloha.Streams.AmazonKinesis.csproj", "{AA88D259-5949-46A5-A04C-5B78E3BAC948}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.Streams.CQRS", "src\Aloha.Streams.CQRS\Aloha.Streams.CQRS.csproj", "{4335E969-FA21-4117-A588-631D7549BE9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.Streams", "src\Aloha.Streams\Aloha.Streams.csproj", "{1BF1298A-32FD-4871-8DED-E8BC521ED666}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +101,14 @@ Global
 		{AA88D259-5949-46A5-A04C-5B78E3BAC948}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA88D259-5949-46A5-A04C-5B78E3BAC948}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA88D259-5949-46A5-A04C-5B78E3BAC948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4335E969-FA21-4117-A588-631D7549BE9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4335E969-FA21-4117-A588-631D7549BE9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4335E969-FA21-4117-A588-631D7549BE9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4335E969-FA21-4117-A588-631D7549BE9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BF1298A-32FD-4871-8DED-E8BC521ED666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BF1298A-32FD-4871-8DED-E8BC521ED666}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BF1298A-32FD-4871-8DED-E8BC521ED666}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BF1298A-32FD-4871-8DED-E8BC521ED666}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +128,8 @@ Global
 		{3D046974-FF40-4724-BE4F-C98164CF9318} = {6CEBED5A-5E6D-43C6-BBF1-14EAFD09E603}
 		{CFA67D3E-A09B-4242-A638-3215134F5983} = {6CEBED5A-5E6D-43C6-BBF1-14EAFD09E603}
 		{AA88D259-5949-46A5-A04C-5B78E3BAC948} = {65DDED9C-3011-4225-BE10-C25442471F1D}
+		{4335E969-FA21-4117-A588-631D7549BE9F} = {65DDED9C-3011-4225-BE10-C25442471F1D}
+		{1BF1298A-32FD-4871-8DED-E8BC521ED666} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {764D7452-E2AD-4907-8F13-D1C2545421FC}
