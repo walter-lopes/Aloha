@@ -6,6 +6,7 @@ using Aloha.CQRS.Commands;
 using Aloha.MessageBrokers.CQRS;
 using Aloha.CQRS.Events;
 using DryIoc;
+using Aloha.Streams.AmazonKinesis;
 
 namespace Aloha.Services.Products
 {
@@ -34,6 +35,7 @@ namespace Aloha.Services.Products
                 .AddEventHandlers()
                 .AddServiceBusEventDispatcher()
                 .AddRabbitMq()
+                .AddAmazonKinesis()
                 .Build();
         }
 

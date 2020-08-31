@@ -1,4 +1,5 @@
 ﻿using Aloha.Streams.AmazonKinesis.Clients;
+using Aloha.Streams.AmazonKinesis.Publishers;
 using DryIoc;
 
 namespace Aloha.Streams.AmazonKinesis
@@ -14,6 +15,8 @@ namespace Aloha.Streams.AmazonKinesis
             builder.Container.RegisterInstance(options);
 
             builder.Container.Register<IAmazonKinesisClient, AmazonKinesisClient>();
+
+            builder.Container.Register<IStreamPublisher, AmazonKinesisPublisher>();
 
             return builder;
         }
