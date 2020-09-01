@@ -7,6 +7,6 @@ namespace Aloha.Streams.AmazonKinesis
     {
         Task<bool> RecordAsync<T>(T @event, string streamName);
 
-        Task<bool> RecordBatchAsync<T>(IEnumerable<T> events, string streamName);
+        Task<bool> RecordAsync<T>(IEnumerable<T> events, string streamName);
     }
 }

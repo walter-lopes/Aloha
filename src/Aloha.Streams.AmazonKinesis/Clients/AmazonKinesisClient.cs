@@ -52,7 +52,7 @@ namespace Aloha.Streams.AmazonKinesis.Clients
             return true;
         }
 
-        public async Task<bool> RecordBatchAsync<T>(IEnumerable<T> events, string streamName)
+        public async Task<bool> RecordAsync<T>(IEnumerable<T> events, string streamName)
         {
             if (!events.Any())
                 return false;
