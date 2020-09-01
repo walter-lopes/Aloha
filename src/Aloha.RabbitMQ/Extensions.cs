@@ -1,5 +1,4 @@
-﻿using Aloha.MessageBrokers;
-using Aloha.MessageBrokers.RabbitMQ.Clients;
+﻿using Aloha.MessageBrokers.RabbitMQ.Clients;
 using Aloha.MessageBrokers.RabbitMQ.Contexts;
 using Aloha.MessageBrokers.RabbitMQ.Conventions;
 using Aloha.MessageBrokers.RabbitMQ.Initializers;
@@ -9,7 +8,6 @@ using Aloha.MessageBrokers.RabbitMQ.Publishers;
 using Aloha.MessageBrokers.RabbitMQ.Serializers;
 using Aloha.MessageBrokers.RabbitMQ.Subscribers;
 using DryIoc;
-using Microsoft.AspNetCore.Builder;
 using RabbitMQ.Client;
 using System;
 

@@ -3,6 +3,8 @@ using Aloha.CQRS.Events;
 using Aloha.MessageBrokers.CQRS.Dispatchers;
 using DryIoc;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Aloha.MessageBrokers.CQRS
@@ -18,18 +20,26 @@ namespace Aloha.MessageBrokers.CQRS
             => busPublisher.PublishAsync(@event, messageContext: messageContext);
 
         public static IBusSubscriber SubscribeCommand<T>(this IBusSubscriber busSubscriber) where T : class, ICommand
-            => busSubscriber.Subscribe<T>(async (serviceProvider, command, _) => 
+            => (IBusSubscriber)busSubscriber.Subscribe<T>(async (serviceProvider, command, _) => 
             {
                 using var scope = serviceProvider.CreateScope();
                 await scope.ServiceProvider.GetRequiredService<ICommandHandler<T>>().HandleAsync(command);
             });
 
         public static IBusSubscriber SubscribeEvent<T>(this IBusSubscriber busSubscriber) where T : class, IEvent
-            => busSubscriber.Subscribe<T>(async (serviceProvider, @event, _) =>
+            => (IBusSubscriber)busSubscriber.Subscribe<T>(async (serviceProvider, @event, _) =>
             {
                 using var scope = serviceProvider.CreateScope();
                 await scope.ServiceProvider.GetRequiredService<IEventHandler<T>>().HandleAsync(@event);
             });
+
+        public static IBusConsumer ConsumeCommand<T>(this IBusConsumer busConsumer) where T : class, ICommand
+            => (IBusConsumer)busConsumer.Consume<T>(async (serviceProvider, commands, _, onError) =>
+           {
+               using var scope = serviceProvider.CreateScope();
+               await scope.ServiceProvider.GetRequiredService<IBatchCommandHandler<T>>().HandleAsync(commands, onError);
+           });
+
 
         public static IAlohaBuilder AddServiceBusCommandDispatcher(this IAlohaBuilder builder)
         {

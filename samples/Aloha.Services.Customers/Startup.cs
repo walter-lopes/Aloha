@@ -1,14 +1,22 @@
-﻿using Microsoft.AspNetCore.Builder;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Aloha.CQRS.Commands;
+using Aloha.CQRS.Events;
+using Aloha.MessageBrokers.AmazonSQS;
+using Aloha.MessageBrokers.CQRS;
+using Aloha.MessageBrokers.RabbitMQ;
+using DryIoc;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Aloha.MessageBrokers.RabbitMQ;
-using Aloha.CQRS.Commands;
-using Aloha.MessageBrokers.CQRS;
-using Aloha.CQRS.Events;
-using DryIoc;
-using Aloha.Streams.AmazonKinesis;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
-namespace Aloha.Services.Products
+namespace Aloha.Services.Customers
 {
     public class Startup
     {
@@ -19,7 +27,6 @@ namespace Aloha.Services.Products
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             var mvcBuilder = services.AddControllers();
@@ -29,28 +36,29 @@ namespace Aloha.Services.Products
         public void ConfigureContainer(IContainer container)
         {
             container
-               .AddAloha()
+                .AddAloha()
                 .AddCommandHandlers()
                 .AddInMemoryCommandDispatcher()
                 .AddEventHandlers()
                 .AddServiceBusEventDispatcher()
-                .AddRabbitMq()
-                .AddAmazonKinesis()
+                .AddAmazonSQS()
                 .Build();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             var container = app.ApplicationServices.GetRequiredService<IContainer>();
 
-            container
-                .UseAloha()
-                .UseRabbitMq()
-                .SubscribeEvent<ProductCreated>();
-
-            app.UseHttpsRedirection();
             app.UseRouting();
+
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -58,9 +66,9 @@ namespace Aloha.Services.Products
         }
 
         public static IContainer CreateMyPreConfiguredContainer() =>
-         new Container(rules =>
-             rules.With(propertiesAndFields: request =>
-                 request.ServiceType.Name.EndsWith("Controller") ? PropertiesAndFields.Properties()(request) : null)
-         );
+          new Container(rules =>
+              rules.With(propertiesAndFields: request =>
+                  request.ServiceType.Name.EndsWith("Controller") ? PropertiesAndFields.Properties()(request) : null)
+          );
     }
 }

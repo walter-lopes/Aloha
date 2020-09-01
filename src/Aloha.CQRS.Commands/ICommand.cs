@@ -1,4 +1,6 @@
-﻿namespace Aloha.CQRS.Commands
+﻿using System.Collections.Generic;
+
+namespace Aloha.CQRS.Commands
 {
     public interface ICommand
     {
