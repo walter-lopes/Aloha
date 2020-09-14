@@ -15,6 +15,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Aloha.Persistence.MongoDB;
+using Aloha.Services.Customers.Domain;
 
 namespace Aloha.Services.Customers
 {
@@ -42,6 +44,8 @@ namespace Aloha.Services.Customers
                 .AddEventHandlers()
                 .AddServiceBusEventDispatcher()
                 .AddAmazonSQS()
+                .AddMongo()
+                .AddMongoRepository<Customer, Guid>("customers")
                 .Build();
         }
 

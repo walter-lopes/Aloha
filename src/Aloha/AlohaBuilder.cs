@@ -48,5 +48,7 @@ namespace Aloha
             _buildActions.ForEach(a => a(_container));
             return _container;
         }
+
+        public bool TryRegister(string name) => _registry.TryAdd(name, true);
     }
 }

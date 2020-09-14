@@ -10,6 +10,8 @@ namespace Aloha
 
         void AddBuildAction(Action<IContainer> execute);
 
+        bool TryRegister(string name);
+
         void AddInitializer<TInitializer>() where TInitializer : IInitializer;
 
         IContainer Build();

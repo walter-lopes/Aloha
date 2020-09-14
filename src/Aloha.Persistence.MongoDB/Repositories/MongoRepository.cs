@@ -12,6 +12,11 @@ namespace Aloha.Persistence.MongoDB.Repositories
     public class MongoRepository<TEntity, TIdentifiable> : IMongoRepository<TEntity, TIdentifiable>
         where TEntity : IIdentifiable<TIdentifiable>
     {
+        public MongoRepository(IMongoDatabase database, string collectionName)
+        {
+            Collection = database.GetCollection<TEntity>(collectionName);
+        }
+
         public IMongoCollection<TEntity> Collection { get; }
 
         public async Task AddAsync(TEntity entity)

@@ -1,12 +1,16 @@
-﻿using DryIoc;
+﻿using Aloha.Persistence.MongoDB.Builders;
+using Aloha.Persistence.MongoDB.Factories;
+using Aloha.Persistence.MongoDB.Initializers;
+using Aloha.Persistence.MongoDB.Repositories;
+using Aloha.Persistence.MongoDB.Seeders;
+using Aloha.Types;
+using DryIoc;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Aloha.Persistence.MongoDB
 {
@@ -53,13 +57,6 @@ namespace Aloha.Persistence.MongoDB
                 made:  Made.Of(() => new MongoClient(options.ConnectionString)
             ));
 
-            builder.Services.AddTransient(sp =>
-            {
-                var options = sp.GetService<MongoDbOptions>();
-                var client = sp.GetService<IMongoClient>();
-                return client.GetDatabase(options.Database);
-            });
-
             builder.Container.Register<IMongoDbInitializer, MongoDbInitializer>();
             builder.Container.Register<IMongoSessionFactory, MongoSessionFactory>();
 
@@ -89,12 +86,23 @@ namespace Aloha.Persistence.MongoDB
             BsonSerializer.RegisterSerializer(typeof(decimal), new DecimalSerializer(BsonType.Decimal128));
             BsonSerializer.RegisterSerializer(typeof(decimal?),
                 new NullableSerializer<decimal>(new DecimalSerializer(BsonType.Decimal128)));
-            ConventionRegistry.Register("convey", new ConventionPack
+            ConventionRegistry.Register("aloha", new ConventionPack
             {
                 new CamelCaseElementNameConvention(),
                 new IgnoreExtraElementsConvention(true),
                 new EnumRepresentationConvention(BsonType.String),
             }, _ => true);
+        }
+
+        public static IAlohaBuilder AddMongoRepository<TEntity, TIdentifiable>(this IAlohaBuilder builder,
+            string collectionName)
+            where TEntity : IIdentifiable<TIdentifiable>
+        {
+            builder.Container.Register<IMongoRepository<TEntity, TIdentifiable>>(
+                reuse: Reuse.Transient,
+                made: Made.Of(() => new MongoRepository<TEntity, TIdentifiable>(Arg.Of<IMongoDatabase>(), collectionName)));
+
+            return builder;
         }
     }
 }
