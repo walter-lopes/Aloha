@@ -52,10 +52,21 @@ namespace Aloha.Persistence.MongoDB
 
             var options = builder.Container.Resolve<MongoDbOptions>();
 
+            string connectionString = options.ConnectionString;
+            string database = options.Database;
+
             builder.Container.Register<IMongoClient>(
                 reuse: Reuse.Singleton,
-                made:  Made.Of(() => new MongoClient(options.ConnectionString)
+                made:  Made.Of(() => new MongoClient(connectionString)
             ));
+
+            var client = builder.Container.Resolve<IMongoClient>();
+            var mongoSettings = new MongoDatabaseSettings { GuidRepresentation = GuidRepresentation.Standard };
+            var mongoDatabase = client.GetDatabase(database, mongoSettings);
+
+            builder.Container.RegisterInstance(mongoDatabase);
+
+
 
             builder.Container.Register<IMongoDbInitializer, MongoDbInitializer>();
             builder.Container.Register<IMongoSessionFactory, MongoSessionFactory>();
@@ -94,6 +105,7 @@ namespace Aloha.Persistence.MongoDB
             }, _ => true);
         }
 
+        [Obsolete]
         public static IAlohaBuilder AddMongoRepository<TEntity, TIdentifiable>(this IAlohaBuilder builder,
             string collectionName)
             where TEntity : IIdentifiable<TIdentifiable>

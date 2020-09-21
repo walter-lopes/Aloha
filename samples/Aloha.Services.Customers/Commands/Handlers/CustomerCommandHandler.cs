@@ -24,7 +24,7 @@ namespace Aloha.Services.Customers.Commands.Handlers
 
             Console.WriteLine($"Customer created: {customer.Id}");
 
-            var @event = new CustomerCreatedEvent() { CustomerId = customer.Id };
+            var @event = new CustomerCreated() { CustomerId = customer.Id };
 
             await _dispatcher.PublishAsync(@event);
         }

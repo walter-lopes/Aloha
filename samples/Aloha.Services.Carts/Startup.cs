@@ -7,6 +7,8 @@ using Aloha.CQRS.Events;
 using Aloha.MessageBrokers.AmazonSQS;
 using Aloha.MessageBrokers.CQRS;
 using Aloha.MessageBrokers.RabbitMQ;
+using Aloha.Persistence.MongoDB;
+using Aloha.Services.Carts.Domain;
 using Aloha.Services.Carts.Events.Externals;
 using DryIoc;
 using Microsoft.AspNetCore.Builder;
@@ -42,8 +44,12 @@ namespace Aloha.Services.Customers
                 .AddInMemoryCommandDispatcher()
                 .AddEventHandlers()
                 .AddServiceBusEventDispatcher()
-                .AddAmazonSQS()
-                .Build();
+                .AddRabbitMq()
+                .AddMongo()
+                .AddMongoRepository<Cart, Guid>("carts")
+                .Build()
+                .UseRabbitMq()
+                    .SubscribeEvent<CustomerCreated>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,7 +67,7 @@ namespace Aloha.Services.Customers
             container
                 .UseAloha()
                 .UseAmazonSQS()
-                .SubscribeEvent<CustomerCreatedEvent>();
+                .SubscribeEvent<CustomerCreated>();
 
             app.UseAuthorization();
 
