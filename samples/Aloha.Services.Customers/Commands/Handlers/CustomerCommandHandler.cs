@@ -1,6 +1,7 @@
 ﻿using Aloha.CQRS.Commands;
 using Aloha.CQRS.Events;
 using Aloha.MessageBrokers;
+using Aloha.Persistence.MongoDB;
 using Aloha.Services.Customers.Domain;
 using Aloha.Services.Customers.Events;
 using System;
@@ -12,9 +13,11 @@ namespace Aloha.Services.Customers.Commands.Handlers
         ICommandHandler<UpdateCustomerCommand>
     {
         private readonly IEventDispatcher _dispatcher;
+        private readonly IMongoRepository<Customer, Guid> _repository;
 
-        public CustomerCommandHandler(IEventDispatcher dispatcher)
+        public CustomerCommandHandler(IEventDispatcher dispatcher, IMongoRepository<Customer, Guid> repository)
         {
+            _repository = repository;
             _dispatcher = dispatcher;
         }
 
@@ -23,6 +26,8 @@ namespace Aloha.Services.Customers.Commands.Handlers
             var customer = new Customer(command.Email);
 
             Console.WriteLine($"Customer created: {customer.Id}");
+
+            await _repository.AddAsync(customer);
 
             var @event = new CustomerCreated() { CustomerId = customer.Id };
 

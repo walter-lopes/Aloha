@@ -19,7 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Aloha.Services.Customers
+namespace Aloha.Services.Carts
 {
     public class Startup
     {
@@ -47,9 +47,7 @@ namespace Aloha.Services.Customers
                 .AddRabbitMq()
                 .AddMongo()
                 .AddMongoRepository<Cart, Guid>("carts")
-                .Build()
-                .UseRabbitMq()
-                    .SubscribeEvent<CustomerCreated>();
+                .Build();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +64,7 @@ namespace Aloha.Services.Customers
 
             container
                 .UseAloha()
-                .UseAmazonSQS()
+                .UseRabbitMq()
                 .SubscribeEvent<CustomerCreated>();
 
             app.UseAuthorization();

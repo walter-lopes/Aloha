@@ -105,7 +105,7 @@ namespace Aloha.Persistence.MongoDB
             }, _ => true);
         }
 
-        [Obsolete]
+
         public static IAlohaBuilder AddMongoRepository<TEntity, TIdentifiable>(this IAlohaBuilder builder,
             string collectionName)
             where TEntity : IIdentifiable<TIdentifiable>

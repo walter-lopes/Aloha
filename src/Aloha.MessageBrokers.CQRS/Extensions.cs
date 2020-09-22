@@ -26,8 +26,8 @@ namespace Aloha.MessageBrokers.CQRS
                 await scope.ServiceProvider.GetRequiredService<ICommandHandler<T>>().HandleAsync(command);
             });
 
-        public static IBusSubscriber SubscribeEvent<T>(this IBusSubscriber busSubscriber) where T : class, IEvent
-            => (IBusSubscriber)busSubscriber.Subscribe<T>(async (serviceProvider, @event, _) =>
+        public static Task<IBusSubscriber> SubscribeEvent<T>(this IBusSubscriber busSubscriber) where T : class, IEvent
+            => busSubscriber.Subscribe<T>(async (serviceProvider, @event, _) =>
             {
                 using var scope = serviceProvider.CreateScope();
                 await scope.ServiceProvider.GetRequiredService<IEventHandler<T>>().HandleAsync(@event);
