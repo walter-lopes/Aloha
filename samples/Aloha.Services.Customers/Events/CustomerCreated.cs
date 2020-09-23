@@ -3,7 +3,7 @@ using System;
 
 namespace Aloha.Services.Customers.Events
 {
-    public class CustomerCreatedEvent : IEvent
+    public class CustomerCreated : IEvent
     {
         public Guid CustomerId { get; set; }
 

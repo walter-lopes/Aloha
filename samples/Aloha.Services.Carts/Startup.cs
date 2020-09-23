@@ -7,6 +7,8 @@ using Aloha.CQRS.Events;
 using Aloha.MessageBrokers.AmazonSQS;
 using Aloha.MessageBrokers.CQRS;
 using Aloha.MessageBrokers.RabbitMQ;
+using Aloha.Persistence.MongoDB;
+using Aloha.Services.Carts.Domain;
 using Aloha.Services.Carts.Events.Externals;
 using DryIoc;
 using Microsoft.AspNetCore.Builder;
@@ -17,7 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Aloha.Services.Customers
+namespace Aloha.Services.Carts
 {
     public class Startup
     {
@@ -42,7 +44,9 @@ namespace Aloha.Services.Customers
                 .AddInMemoryCommandDispatcher()
                 .AddEventHandlers()
                 .AddServiceBusEventDispatcher()
-                .AddAmazonSQS()
+                .AddRabbitMq()
+                .AddMongo()
+                .AddMongoRepository<Cart, Guid>("carts")
                 .Build();
         }
 
@@ -60,8 +64,8 @@ namespace Aloha.Services.Customers
 
             container
                 .UseAloha()
-                .UseAmazonSQS()
-                .SubscribeEvent<CustomerCreatedEvent>();
+                .UseRabbitMq()
+                .SubscribeEvent<CustomerCreated>();
 
             app.UseAuthorization();
 

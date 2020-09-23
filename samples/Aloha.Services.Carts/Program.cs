@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using static DryIoc.Microsoft.DependencyInjection.DryIocAdapter;
 
-namespace Aloha.Services.Customers
+namespace Aloha.Services.Carts
 {
     public class Program
     {

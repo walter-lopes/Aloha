@@ -35,9 +35,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.Services.Carts", "sam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.Streams.AmazonKinesis", "src\Aloha.Streams.AmazonKinesis\Aloha.Streams.AmazonKinesis.csproj", "{AA88D259-5949-46A5-A04C-5B78E3BAC948}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.Streams.CQRS", "src\Aloha.Streams.CQRS\Aloha.Streams.CQRS.csproj", "{4335E969-FA21-4117-A588-631D7549BE9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.Streams.CQRS", "src\Aloha.Streams.CQRS\Aloha.Streams.CQRS.csproj", "{4335E969-FA21-4117-A588-631D7549BE9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.Streams", "src\Aloha.Streams\Aloha.Streams.csproj", "{1BF1298A-32FD-4871-8DED-E8BC521ED666}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.Streams", "src\Aloha.Streams\Aloha.Streams.csproj", "{1BF1298A-32FD-4871-8DED-E8BC521ED666}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.Persistence.MongoDB", "src\Aloha.Persistence.MongoDB\Aloha.Persistence.MongoDB.csproj", "{710F708B-8F53-4482-A4C5-FDCB82FBE45F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +111,10 @@ Global
 		{1BF1298A-32FD-4871-8DED-E8BC521ED666}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BF1298A-32FD-4871-8DED-E8BC521ED666}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BF1298A-32FD-4871-8DED-E8BC521ED666}.Release|Any CPU.Build.0 = Release|Any CPU
+		{710F708B-8F53-4482-A4C5-FDCB82FBE45F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{710F708B-8F53-4482-A4C5-FDCB82FBE45F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{710F708B-8F53-4482-A4C5-FDCB82FBE45F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{710F708B-8F53-4482-A4C5-FDCB82FBE45F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +136,7 @@ Global
 		{AA88D259-5949-46A5-A04C-5B78E3BAC948} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 		{4335E969-FA21-4117-A588-631D7549BE9F} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 		{1BF1298A-32FD-4871-8DED-E8BC521ED666} = {65DDED9C-3011-4225-BE10-C25442471F1D}
+		{710F708B-8F53-4482-A4C5-FDCB82FBE45F} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {764D7452-E2AD-4907-8F13-D1C2545421FC}

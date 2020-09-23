@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Aloha.Types;
+using System;
 
 namespace Aloha.Services.Customers.Domain
 {
-    public class Customer
+    public class Customer : IIdentifiable<Guid>
     {
         public Customer(string email)
         {
