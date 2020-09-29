@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Aloha.Services.Customers
+namespace Aloha.Services.Carts
 {
     public class Startup
     {

@@ -1,6 +1,7 @@
 ﻿using Aloha.CQRS.Events;
 using Aloha.Persistence.MongoDB;
-using Aloha.Services.Carts.Domain;
+using Aloha.Services.Carts.Application.Events.Externals;
+using Aloha.Services.Carts.Core.Entities;
 using System;
 using System.Threading.Tasks;
 

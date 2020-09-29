@@ -16,7 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Aloha.Persistence.MongoDB;
-using Aloha.Services.Customers.Domain;
+using Aloha.Services.Customers.Core.Entities;
 
 namespace Aloha.Services.Customers
 {

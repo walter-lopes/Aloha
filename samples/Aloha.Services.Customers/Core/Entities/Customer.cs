@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Aloha.Types;
+using System;
 
 namespace Aloha.Services.Customers.Core.Entities
 {
-    public class Customer
+    public class Customer : IIdentifiable<Guid>
     {
         public Customer(string email)
         {
