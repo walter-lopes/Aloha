@@ -1,21 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Aloha.CQRS.Commands;
 using Aloha.CQRS.Events;
 using Aloha.MessageBrokers.AmazonSQS;
 using Aloha.MessageBrokers.CQRS;
-using Aloha.MessageBrokers.RabbitMQ;
-using Aloha.Services.Carts.Events.Externals;
+using Aloha.Services.Carts.Application.Events.Externals;
 using DryIoc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Aloha.Services.Customers
 {
@@ -61,7 +54,7 @@ namespace Aloha.Services.Customers
             container
                 .UseAloha()
                 .UseAmazonSQS()
-                .SubscribeEvent<CustomerCreatedEvent>();
+                .SubscribeEvent<CustomerCreated>();
 
             app.UseAuthorization();
 

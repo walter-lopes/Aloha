@@ -1,11 +1,11 @@
 ﻿using Aloha.CQRS.Commands;
 using System;
 
-namespace Aloha.Services.Customers.Commands
+namespace Aloha.Services.Carts.Application.Commands
 {
-    public class CreateCustomerCommand : ICommand
+    public class CreateCart : ICommand
     {
-        public string Email { get; set; }
+        public string Name { get; set; }
 
         public bool IsValid()
         {

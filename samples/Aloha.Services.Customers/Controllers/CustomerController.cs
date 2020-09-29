@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Aloha.CQRS.Commands;
 using Aloha.Services.Customers.Commands;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aloha.Services.Customers.Controllers
@@ -21,7 +17,7 @@ namespace Aloha.Services.Customers.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateCustomerCommand command)
+        public async Task<IActionResult> Post([FromBody] CreateCustomer command)
         {
             await _dispatcher.SendAsync(command);
 

@@ -1,7 +1,7 @@
 ﻿using Aloha.CQRS.Commands;
 using Aloha.CQRS.Notifications;
 using Aloha.CQRS.Notifications.Dispatchers;
-using Aloha.Services.Carts.Commands;
+using Aloha.Services.Carts.Application.Commands;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -16,27 +16,19 @@ namespace Aloha.Services.Carts.Controllers
 
         public CartsController(ICommandDispatcher dispatcher, INotificationDispatcher notificationDispatcher)
         {
-           _dispatcher = dispatcher;
+            _dispatcher = dispatcher;
             _notificationDispatcher = (NotificationDispatcher)notificationDispatcher;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] AddCartCommand command)
+        public async Task<IActionResult> Post([FromBody] CreateCart command)
         {
-            try
-            {
-                await _dispatcher.SendAsync(command);
 
-                _notificationDispatcher.HasNotifications();
+            await _dispatcher.SendAsync(command);
 
-                return Accepted();
-            }
-            catch (System.Exception ex)
-            {
+            _notificationDispatcher.HasNotifications();
 
-                return Ok(ex.Message);
-            }
-            
+            return Accepted();
         }
     }
 }
