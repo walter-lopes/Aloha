@@ -52,9 +52,7 @@ namespace Aloha.Services.Carts
             app.UseRouting();
 
             container
-                .UseAloha()
-                .UseAmazonSQS()
-                .SubscribeEvent<CustomerCreated>();
+                .UseAloha();
 
             app.UseAuthorization();
 

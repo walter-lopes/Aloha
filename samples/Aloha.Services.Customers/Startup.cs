@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Aloha.Persistence.MongoDB;
 using Aloha.Services.Customers.Core.Entities;
+using Aloha.CQRS.Notifications;
 
 namespace Aloha.Services.Customers
 {
@@ -43,6 +44,7 @@ namespace Aloha.Services.Customers
                 .AddInMemoryCommandDispatcher()
                 .AddEventHandlers()
                 .AddServiceBusEventDispatcher()
+                .AddInMemoryNotificationDispatcher()
                 .AddRabbitMq()
                 .AddMongo()
                 .AddMongoRepository<Customer, Guid>("customers")
