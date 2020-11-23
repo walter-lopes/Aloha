@@ -25,8 +25,6 @@ namespace Aloha.Services.Customers.Controllers
         {
             await _dispatcher.SendAsync(command);
 
-            _notificationDispatcher.HasNotifications();
-
             return Accepted();
         }
     }

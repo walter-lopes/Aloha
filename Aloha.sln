@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.Persistence.MongoDB",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.Grpc", "src\Aloha.Grpc\Aloha.Grpc.csproj", "{A1DB7243-9F22-4A0A-8A11-8DE5F8B42762}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.Caching.Redis", "src\Aloha.Caching.Redis\Aloha.Caching.Redis.csproj", "{56626ACC-05E4-4C16-9066-9C47BEB92C56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,10 @@ Global
 		{A1DB7243-9F22-4A0A-8A11-8DE5F8B42762}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1DB7243-9F22-4A0A-8A11-8DE5F8B42762}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1DB7243-9F22-4A0A-8A11-8DE5F8B42762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56626ACC-05E4-4C16-9066-9C47BEB92C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56626ACC-05E4-4C16-9066-9C47BEB92C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56626ACC-05E4-4C16-9066-9C47BEB92C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56626ACC-05E4-4C16-9066-9C47BEB92C56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -144,6 +150,7 @@ Global
 		{1BF1298A-32FD-4871-8DED-E8BC521ED666} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 		{710F708B-8F53-4482-A4C5-FDCB82FBE45F} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 		{A1DB7243-9F22-4A0A-8A11-8DE5F8B42762} = {65DDED9C-3011-4225-BE10-C25442471F1D}
+		{56626ACC-05E4-4C16-9066-9C47BEB92C56} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {764D7452-E2AD-4907-8F13-D1C2545421FC}

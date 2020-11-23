@@ -17,9 +17,5 @@
     <ProjectReference Include="..\..\src\Alora.CQRS.Events\Aloha.CQRS.Events.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Infrastructure\Mongo\" />
-  </ItemGroup>
-
 
 </Project>

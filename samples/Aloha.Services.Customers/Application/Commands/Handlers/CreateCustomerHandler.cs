@@ -2,6 +2,7 @@
 using Aloha.CQRS.Events;
 using Aloha.CQRS.Notifications;
 using Aloha.Notifications;
+using Aloha.Persistence.MongoDB;
 using Aloha.Services.Customers.Core.Entities;
 using Aloha.Services.Customers.Events;
 using System;
@@ -12,24 +13,19 @@ namespace Aloha.Services.Customers.Commands.Handlers
     public class CreateCustomerHandler : ICommandHandler<CreateCustomer>
     {
         private readonly IEventDispatcher _dispatcher;
-        private readonly INotificationDispatcher _notification;
+        private readonly IMongoRepository<Customer, Guid> _customerRepository;
 
-        public CreateCustomerHandler(IEventDispatcher dispatcher, INotificationDispatcher notification)
+        public CreateCustomerHandler(IEventDispatcher dispatcher, IMongoRepository<Customer, Guid> customerRepository)
         {
             _dispatcher = dispatcher;
-            _notification = notification;
+            _customerRepository = customerRepository;
         }
 
         public async Task HandleAsync(CreateCustomer command)
         {
-            if (!command.IsValid())
-            {
-                await _notification.PublishAsync(new DomainNotification("ble", "ble"));
-            }
-
             var customer = new Customer(command.Email);
 
-            Console.WriteLine($"Customer created: {customer.Id}");
+            await _customerRepository.AddAsync(customer);
 
             var @event = new CustomerCreated(customer.Id);
 

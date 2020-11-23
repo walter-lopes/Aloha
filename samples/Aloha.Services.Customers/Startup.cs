@@ -45,7 +45,7 @@ namespace Aloha.Services.Customers
                 .AddEventHandlers()
                 .AddServiceBusEventDispatcher()
                 .AddInMemoryNotificationDispatcher()
-                .AddRabbitMq()
+                .AddAmazonSQS()
                 .AddMongo()
                 .AddMongoRepository<Customer, Guid>("customers")
                 .Build();

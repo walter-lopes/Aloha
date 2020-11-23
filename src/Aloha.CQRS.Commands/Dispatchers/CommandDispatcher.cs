@@ -1,5 +1,4 @@
 ﻿using Aloha.CQRS.Notifications;
-using Aloha.Notifications;
 using DryIoc;
 using System.Threading.Tasks;
 
@@ -18,12 +17,7 @@ namespace Aloha.CQRS.Commands.Dispatchers
 
         public async Task SendAsync<T>(T command) where T : class, ICommand
         {
-            var handler = _serviceFactory.Resolve<ICommandHandler<T>>();
-            
-            if (!command.IsValid())
-            {
-                await _notification.PublishAsync(new DomainNotification("bla", "bla"));
-            }
+            var handler = _serviceFactory.Resolve<ICommandHandler<T>>();           
 
             await handler.HandleAsync(command);
         }
