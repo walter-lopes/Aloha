@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: customersapi
+    version: "1.0"
+  name: customersapi-v1
+  namespace: walterguga
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customersapi
+      version: "1.0"
+  template:
+    metadata:
+      labels:
+        app: customersapi
+        version: "1.0"
+      annotations:
+        sidecar.istio.io/inject: "true"
+    spec:
+      containers:
+      - env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        image: walterguga/customersapi:1.0
+        imagePullPolicy: IfNotPresent
+        name: customersapi
+        ports:
+        - containerPort: 5200
+      restartPolicy: Always
+  

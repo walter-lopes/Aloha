@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Aloha.CQRS.Commands;
 using Aloha.CQRS.Events;
-using Aloha.MessageBrokers.AmazonSQS;
 using Aloha.MessageBrokers.CQRS;
 using Aloha.MessageBrokers.RabbitMQ;
 using DryIoc;
@@ -15,10 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Aloha.Persistence.MongoDB;
-using Aloha.Services.Customers.Core.Entities;
 using Aloha.CQRS.Notifications;
-using Aloha.Logging;
 
 namespace Aloha.Services.Customers
 {
@@ -46,10 +42,8 @@ namespace Aloha.Services.Customers
                 .AddEventHandlers()
                 .AddServiceBusEventDispatcher()
                 .AddInMemoryNotificationDispatcher()
-                .AddAmazonSQS()
-                .AddMongo()
-                .AddMongoRepository<Customer, Guid>("customers")
-                .UseSerilog(Configuration)
+                .AddRabbitMq()
+              
                 .Build();
         }
 

@@ -5,13 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Aloha.CQRS.Commands\Aloha.CQRS.Commands.csproj" />
-    <ProjectReference Include="..\..\src\Aloha.CQRS.Notifications\Aloha.CQRS.Notifications.csproj" />
-    <ProjectReference Include="..\..\src\Aloha.CQRS.Queries\Aloha.CQRS.Queries.csproj" />
-    <ProjectReference Include="..\..\src\Aloha.MessageBrokers.AmazonSQS\Aloha.MessageBrokers.AmazonSQS.csproj" />
-    <ProjectReference Include="..\..\src\Aloha.MessageBrokers.CQRS\Aloha.MessageBrokers.CQRS.csproj" />
-    <ProjectReference Include="..\..\src\Aloha.Persistence.MongoDB\Aloha.Persistence.MongoDB.csproj" />
-    <ProjectReference Include="..\..\src\Aloha.RabbitMQ\Aloha.MessageBrokers.RabbitMQ.csproj" />
-    <ProjectReference Include="..\..\src\Alora.CQRS.Events\Aloha.CQRS.Events.csproj" />
+    <None Remove="Dockerfile" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Aloha" Version="1.0.1" />
+    <PackageReference Include="Aloha.CQRS.Commands" Version="1.0.1" />
+    <PackageReference Include="Aloha.CQRS.Events" Version="1.0.1" />
+    <PackageReference Include="Aloha.CQRS.Notifications" Version="1.0.1" />
+    <PackageReference Include="Aloha.MessageBrokers" Version="1.0.1" />
+    <PackageReference Include="Aloha.MessageBrokers.CQRS" Version="1.0.1" />
+    <PackageReference Include="Aloha.MessageBrokers.RabbitMQ" Version="1.0.0" />
+  </ItemGroup>
+  
 </Project>

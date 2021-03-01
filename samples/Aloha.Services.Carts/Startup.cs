@@ -1,6 +1,5 @@
 using Aloha.CQRS.Commands;
 using Aloha.CQRS.Events;
-using Aloha.MessageBrokers.AmazonSQS;
 using Aloha.MessageBrokers.CQRS;
 using Aloha.Services.Carts.Application.Events.Externals;
 using DryIoc;
@@ -9,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Aloha.MessageBrokers.RabbitMQ;
 
 namespace Aloha.Services.Carts
 {
@@ -31,11 +31,6 @@ namespace Aloha.Services.Carts
         {
             container
                 .AddAloha()
-                .AddCommandHandlers()
-                .AddInMemoryCommandDispatcher()
-                .AddEventHandlers()
-                .AddServiceBusEventDispatcher()
-                .AddAmazonSQS()
                 .Build();
         }
 

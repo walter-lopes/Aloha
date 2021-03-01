@@ -8,7 +8,7 @@
     <ProjectReference Include="..\Aloha.CQRS.Commands\Aloha.CQRS.Commands.csproj" />
     <ProjectReference Include="..\Aloha.MessageBrokers\Aloha.MessageBrokers.csproj" />
     <ProjectReference Include="..\Aloha\Aloha.csproj" />
-    <ProjectReference Include="..\Alora.CQRS.Events\Aloha.CQRS.Events.csproj" />
+    <ProjectReference Include="..\Aloha.CQRS.Events\Aloha.CQRS.Events.csproj" />
   </ItemGroup>
 
 </Project>

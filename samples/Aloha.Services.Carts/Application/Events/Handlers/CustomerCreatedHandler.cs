@@ -1,5 +1,4 @@
 ﻿using Aloha.CQRS.Events;
-using Aloha.Persistence.MongoDB;
 using Aloha.Services.Carts.Application.Events.Externals;
 using Aloha.Services.Carts.Core.Entities;
 using System;
@@ -9,18 +8,18 @@ namespace Aloha.Services.Carts.Events.Externals.Handlers
 {
     public class CustomerCreatedHandler : IEventHandler<CustomerCreated>
     {
-        private readonly IMongoRepository<Cart, Guid> _repository;
+      //  private readonly IMongoRepository<Cart, Guid> _repository;
 
-        public CustomerCreatedHandler(IMongoRepository<Cart, Guid> repository)
+        public CustomerCreatedHandler()
         {
-            _repository = repository;
+           
         }
 
         public async Task HandleAsync(CustomerCreated @event)
         {
             var cart = new Cart(@event.CustomerId);
 
-            await _repository.AddAsync(cart);
+           // await _repository.AddAsync(cart);
         }
     }
 }

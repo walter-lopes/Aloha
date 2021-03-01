@@ -9,9 +9,9 @@
     <ProjectReference Include="..\..\..\src\Aloha.CQRS.Queries\Aloha.CQRS.Queries.csproj" />
     <ProjectReference Include="..\..\..\src\Aloha.MessageBrokers.CQRS\Aloha.MessageBrokers.CQRS.csproj" />
     <ProjectReference Include="..\..\..\src\Aloha.MessageBrokers\Aloha.MessageBrokers.csproj" />
-    <ProjectReference Include="..\..\..\src\Aloha.RabbitMQ\Aloha.MessageBrokers.RabbitMQ.csproj" />
+    <ProjectReference Include="..\..\..\src\Aloha.MessageBrokers.RabbitMQ\Aloha.MessageBrokers.RabbitMQ.csproj" />
     <ProjectReference Include="..\..\..\src\Aloha.Streams.AmazonKinesis\Aloha.Streams.AmazonKinesis.csproj" />
-    <ProjectReference Include="..\..\..\src\Alora.CQRS.Events\Aloha.CQRS.Events.csproj" />
+    <ProjectReference Include="..\..\..\src\Aloha.CQRS.Events\Aloha.CQRS.Events.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Aloha.Streams\Aloha.Streams.csproj" />
-    <ProjectReference Include="..\Alora.CQRS.Events\Aloha.CQRS.Events.csproj" />
+    <ProjectReference Include="..\Aloha.CQRS.Events\Aloha.CQRS.Events.csproj" />
   </ItemGroup>
 
 </Project>

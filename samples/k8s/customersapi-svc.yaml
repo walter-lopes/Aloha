@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: customersapi
+  name: customersapi
+  namespace: walterguga
+spec:
+  type: NodePort
+  ports:
+  - name: "http-5200"
+    port: 5200
+    targetPort: 5200
+    nodePort: 30004
+  selector:
+    app: customersapi
+    version: "1.0"

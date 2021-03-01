@@ -11,24 +11,18 @@ namespace Aloha.Services.Carts.Controllers
     [ApiController]
     public class CartsController : ControllerBase
     {
-        private readonly ICommandDispatcher _dispatcher;
-        private readonly NotificationDispatcher _notificationDispatcher;
-
-        public CartsController(ICommandDispatcher dispatcher, INotificationDispatcher notificationDispatcher)
+      
+        public CartsController()
         {
-            _dispatcher = dispatcher;
-            _notificationDispatcher = (NotificationDispatcher)notificationDispatcher;
+           
+            
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateCart command)
+        
+        [HttpGet("ping")]
+        public IActionResult Get()
         {
-
-            await _dispatcher.SendAsync(command);
-
-            _notificationDispatcher.HasNotifications();
-
-            return Accepted();
+           return Ok("pong");
         }
     }
 }

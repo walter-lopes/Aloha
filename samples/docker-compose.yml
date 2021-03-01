@@ -1,0 +1,43 @@
+version: '3'
+services:
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    volumes:
+      - rabbitmqdata:/var/lib/rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - walterguga
+
+  customersapi:
+    image: walterguga/customersapi:1.0
+    build: Aloha.Services.Customers
+    depends_on: 
+        - rabbitmq
+    ports: 
+        - "5100"
+    networks:
+      - walterguga   
+  
+  cartsapi:
+    image: walterguga/cartsapi:1.0
+    build: Aloha.Services.Carts
+    depends_on: 
+        - rabbitmq
+    ports: 
+        - "5200"
+    networks:
+      - walterguga
+
+volumes:  
+  rabbitmqdata:
+    external: true
+networks:
+  walterguga:
+    driver: bridge
