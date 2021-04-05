@@ -1,10 +1,9 @@
 ﻿using Aloha.CQRS.Commands;
 using Aloha.CQRS.Events;
 using Aloha.MessageBrokers.CQRS.Dispatchers;
+using Aloha.Types;
 using DryIoc;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Aloha.MessageBrokers.CQRS
@@ -33,11 +32,11 @@ namespace Aloha.MessageBrokers.CQRS
                 await scope.ServiceProvider.GetRequiredService<IEventHandler<T>>().HandleAsync(@event);
             });
 
-        public static IBusConsumer ConsumeCommand<T>(this IBusConsumer busConsumer) where T : class, ICommand
-            => (IBusConsumer)busConsumer.Consume<T>(async (serviceProvider, commands, _, onError) =>
+        public static Task<IBusConsumer> ConsumeCommand<T>(this IBusConsumer busConsumer) where T : class, ICommand, IIdentifiable<string>
+            => busConsumer.Consume<T>(async (serviceProvider, commands) =>
            {
                using var scope = serviceProvider.CreateScope();
-               await scope.ServiceProvider.GetRequiredService<IBatchCommandHandler<T>>().HandleAsync(commands, onError);
+               return await scope.ServiceProvider.GetRequiredService<ICommandBatchHandler<T>>().HandleAsync(commands);
            });
 
 

@@ -13,5 +13,7 @@ namespace Aloha.MessageBrokers.AmazonSQS
         public string ServiceUrl { get; set; }
 
         public IDictionary<string, string> Queues { get; set; }
+
+        public int ItemsToConsume { get; set; }
     }
 }

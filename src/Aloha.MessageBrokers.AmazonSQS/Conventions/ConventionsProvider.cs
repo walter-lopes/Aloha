@@ -5,8 +5,7 @@ namespace Aloha.MessageBrokers.AmazonSQS.Conventions
 {
     public class ConventionsProvider : IConventionsProvider
     {
-        private readonly ConcurrentDictionary<Type, IConventions> _conventions =
-         new ConcurrentDictionary<Type, IConventions>();
+        private readonly ConcurrentDictionary<Type, IConventions> _conventions = new ConcurrentDictionary<Type, IConventions>();
 
         private readonly AmazonSQSOptions _options;
 

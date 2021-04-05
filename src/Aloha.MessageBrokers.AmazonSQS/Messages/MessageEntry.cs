@@ -6,6 +6,8 @@ namespace Aloha.MessageBrokers.AmazonSQS.Messages
     {
         public string Id { get; set; }
 
+        public string UniqueKey { get; set; }
+
         public string ReceiptHandle { get; set; }
     }
 

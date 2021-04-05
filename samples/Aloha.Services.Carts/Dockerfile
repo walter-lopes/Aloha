@@ -13,9 +13,5 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 COPY --from=build-env /app/out .
 
-# Expose ports
-EXPOSE 5200/tcp
-ENV ASPNETCORE_URLS http://*:5200
-
 # Start
 ENTRYPOINT ["dotnet", "Aloha.Services.Carts.dll"]

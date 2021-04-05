@@ -9,8 +9,8 @@ namespace Aloha.CQRS.Commands
         Task HandleAsync(TCommand command);
     }
 
-    public interface IBatchCommandHandler<TCommand> where TCommand : class, ICommand
+    public interface ICommandBatchHandler<TCommand> where TCommand : class, ICommand
     {
-        Task HandleAsync(IEnumerable<TCommand> commands, Func<IEnumerable<TCommand>, Task> onError = null);
+        Task<IEnumerable<TCommand>> HandleAsync(IEnumerable<TCommand> commands);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Aloha.MessageBrokers.AmazonSQS.Messages;
+using Aloha.Types;
 using Amazon.Runtime;
 using Amazon.SQS;
 using Amazon.SQS.Model;
@@ -26,7 +27,7 @@ namespace Aloha.MessageBrokers.AmazonSQS.Clients
             _serializer = serializer;
         }
 
-        public async Task<bool> DeleteMessagesAsync<T>(IEnumerable<MessageEntry<T>> messages, string queueUrl)
+        public async Task<bool> DeleteMessagesAsync<T>(List<MessageEntry<T>> messages, string queueUrl)
         {
             var queueEndpoint = GetQueueEndpoint(queueUrl);
 
@@ -176,6 +177,67 @@ namespace Aloha.MessageBrokers.AmazonSQS.Clients
             }
 
             return queueEndpoint;
+        }
+
+        public async Task<bool> DeleteMessagesAsync<T>(IEnumerable<MessageEntry<T>> messages, string queueUrl = "") where T : IIdentifiable<string>
+        {
+            try
+            {
+                var queueEndpoint = GetQueueEndpoint(queueUrl);
+
+                int pageSize = 10;
+                int messagesCount = 0;
+                int totalMessages = messages.Count();
+
+                IList<Task<DeleteMessageBatchResponse>> responseTasks = new List<Task<DeleteMessageBatchResponse>>();
+
+                while (messagesCount < totalMessages)
+                {
+                    var requests = new List<DeleteMessageBatchRequestEntry>();
+
+                    int currentMessagesCount = 0;
+                    int objIndex = messagesCount;
+
+                    while (objIndex < totalMessages && currentMessagesCount < pageSize)
+                    {
+                        var message = messages.ElementAt(objIndex);
+
+                        requests.Add(new DeleteMessageBatchRequestEntry
+                        {
+                            Id = message.Id,
+                            ReceiptHandle = message.ReceiptHandle
+                        });
+
+                        currentMessagesCount++;
+                        objIndex = messagesCount + currentMessagesCount;
+                    }
+
+                    var request = new DeleteMessageBatchRequest(queueEndpoint, requests);
+                    var responseTask = _amazonSQS.DeleteMessageBatchAsync(request);
+                    responseTasks.Add(responseTask);
+
+                    messagesCount += requests.Count;
+                }
+
+                IEnumerable<DeleteMessageBatchResponse> responses = await Task.WhenAll(responseTasks);
+
+                foreach (var response in responses)
+                {
+                    if (response.HttpStatusCode != HttpStatusCode.OK)
+                        throw new Exception($"Error deleting message. HttpStatusCode: {response.HttpStatusCode}");
+
+                    if (response.Failed?.Any() == true)
+                        throw new Exception($"Error deleting message. Code: {response.Failed[0].Code}. Error: {response.Failed[0].Message}");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error to delete messages. {ex.Message}");
+            }
+
+
+            return true;
         }
     }
 }
