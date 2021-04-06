@@ -3,7 +3,7 @@ using System;
 
 namespace Aloha.Services.Customers.Commands
 {
-    public class CreateCustomer : ICommand
+    public record CreateCustomerCommand : ICommand
     {
         public string Name { get; set; }
 

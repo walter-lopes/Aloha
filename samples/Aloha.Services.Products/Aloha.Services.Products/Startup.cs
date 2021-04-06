@@ -6,7 +6,9 @@ using Aloha.CQRS.Commands;
 using Aloha.MessageBrokers.CQRS;
 using Aloha.CQRS.Events;
 using DryIoc;
-using Aloha.Streams.AmazonKinesis;
+using Aloha.Persistence.MongoDB;
+using Aloha.Services.Products.Domain;
+using System;
 
 namespace Aloha.Services.Products
 {
@@ -19,7 +21,7 @@ namespace Aloha.Services.Products
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+     
         public void ConfigureServices(IServiceCollection services)
         {
             var mvcBuilder = services.AddControllers();
@@ -29,14 +31,12 @@ namespace Aloha.Services.Products
         public void ConfigureContainer(IContainer container)
         {
             container
-               .AddAloha()
-                .AddCommandHandlers()
-                .AddInMemoryCommandDispatcher()
-                .AddEventHandlers()
-                .AddServiceBusEventDispatcher()
-                .AddRabbitMq()
-                .AddAmazonKinesis()
-                .Build();
+            .AddAloha()
+            .AddCommandHandlers()
+            .AddInMemoryCommandDispatcher()
+            .AddMongo()
+            .AddMongoRepository<Product, Guid>("products")
+            .Build();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

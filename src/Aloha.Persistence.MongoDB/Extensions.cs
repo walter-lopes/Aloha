@@ -106,8 +106,7 @@ namespace Aloha.Persistence.MongoDB
         }
 
 
-        public static IAlohaBuilder AddMongoRepository<TEntity, TIdentifiable>(this IAlohaBuilder builder,
-            string collectionName)
+        public static IAlohaBuilder AddMongoRepository<TEntity, TIdentifiable>(this IAlohaBuilder builder, string collectionName)
             where TEntity : IIdentifiable<TIdentifiable>
         {
             builder.Container.Register<IMongoRepository<TEntity, TIdentifiable>>(

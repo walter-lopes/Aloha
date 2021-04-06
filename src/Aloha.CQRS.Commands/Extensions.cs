@@ -11,12 +11,11 @@ namespace Aloha.CQRS.Commands
         {
             var assemblies = AppDomain.CurrentDomain.GetAssemblies()
                                     .SelectMany(x => x.GetTypes())
-                                        .Where(t => t.GetInterfaces()
-                                        .Any(i => i.IsGenericType && i.GetGenericTypeDefinition().Equals(typeof(ICommandHandler<>))))
-                                        .Select(x => x.Assembly);
+                                        .Where(t => t.GetInterfaces().Any(i => i.IsGenericType 
+                                                                            && i.GetGenericTypeDefinition().Equals(typeof(ICommandHandler<>))))
+                                        .Select(x => x.Assembly).ToList();
 
-            builder.Container.RegisterMany(assemblies, 
-                                            getServiceTypes: implType => implType.GetImplementedServiceTypes());
+            builder.Container.RegisterMany(assemblies,  implType => implType.GetImplementedServiceTypes());
 
             return builder;
         }

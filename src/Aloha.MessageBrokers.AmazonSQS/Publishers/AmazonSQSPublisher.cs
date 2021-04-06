@@ -22,17 +22,20 @@ namespace Aloha.MessageBrokers.AmazonSQS.Publishers
         {
             var entry = new MessageEntry<T>(message);
 
-            await _amazonSQSClient.EnqueueAsync(entry, _conventions.Get<T>().Queue);
+            string queue = _conventions.Get<T>().Queue;
+
+            await _amazonSQSClient.EnqueueAsync(entry, queue);
         }
 
         public async Task PublishBatchAsync<T>(IEnumerable<T> messages, string messageId = null, string correlationId = null,
             string spanContext = null, object messageContext = null, 
             IDictionary<string, object> headers = null) where T : class
         {
-            var entries = messages
-                            .Select(obj => new MessageEntry<T>(obj));
+            var entries = messages.Select(message => new MessageEntry<T>(message));
 
-            await _amazonSQSClient.EnqueueBatchAsync(entries, _conventions.Get<T>().Queue);
+            string queue = _conventions.Get<T>().Queue;
+
+            await _amazonSQSClient.EnqueueBatchAsync(entries, queue);
         }
     }
 }

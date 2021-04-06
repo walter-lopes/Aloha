@@ -1,6 +1,7 @@
 ﻿
 using Aloha.CQRS.Commands;
-using Aloha.CQRS.Events;
+using Aloha.Persistence.MongoDB;
+using Aloha.Services.Products.Domain;
 using System;
 using System.Threading.Tasks;
 
@@ -8,16 +9,16 @@ namespace Aloha.Services.Products.Commands.Handlers
 {
     public class CreateProductHandler : ICommandHandler<CreateProduct>
     {
-        private readonly IEventDispatcher _dispatcher;
+        private readonly IMongoRepository<Product, Guid> _mongoRepository;
 
-        public CreateProductHandler(IEventDispatcher dispatcher)
+        public CreateProductHandler(IMongoRepository<Product, Guid> mongoRepository)
         {
-            _dispatcher = dispatcher;
+            _mongoRepository = mongoRepository;
         }
 
         public async Task HandleAsync(CreateProduct command)
         {
-           await _dispatcher.PublishAsync(new ProductCreated() { Id = Guid.NewGuid(), Name = "Name" });
+            await _mongoRepository.AddAsync(new Product(command.Name));
         }
     }
 }
