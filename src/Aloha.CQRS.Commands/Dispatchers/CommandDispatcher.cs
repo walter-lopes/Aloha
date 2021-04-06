@@ -7,19 +7,26 @@ namespace Aloha.CQRS.Commands.Dispatchers
     public class CommandDispatcher : ICommandDispatcher
     {
         private readonly IContainer _serviceFactory;
-        private readonly INotificationDispatcher _notification;
 
-        public CommandDispatcher(IContainer serviceFactory, INotificationDispatcher notification)
+        public CommandDispatcher(IContainer serviceFactory)
         {
             _serviceFactory = serviceFactory;
-            _notification = notification;
         }
 
         public async Task SendAsync<T>(T command) where T : class, ICommand
         {
-            var handler = _serviceFactory.Resolve<ICommandHandler<T>>();           
+            try
+            {
+                var handler = _serviceFactory.Resolve<ICommandHandler<T>>();
 
-            await handler.HandleAsync(command);
+                await handler.HandleAsync(command);
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
+            
         }
     }
 }

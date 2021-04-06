@@ -2,6 +2,7 @@
 using Aloha.MessageBrokers;
 using Aloha.CQRS.Commands;
 using Aloha.Services.Products.Commands;
+using System.Threading.Tasks;
 
 namespace Aloha.Services.Products.Controllers
 {
@@ -9,22 +10,18 @@ namespace Aloha.Services.Products.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly IBusPublisher _publisher;
-        private readonly IBusSubscriber _subscriber;
         private readonly ICommandDispatcher _dispatcher;
 
-        public ValuesController(IBusPublisher publisher, IBusSubscriber subscriber, ICommandDispatcher dispatcher)
+        public ValuesController(ICommandDispatcher dispatcher)
         {
-            _publisher = publisher;
-            _subscriber = subscriber;
             _dispatcher = dispatcher;
         }
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody] CreateProduct command)
+        public async Task<IActionResult> Post([FromBody] CreateProduct command)
         {
-            _dispatcher.SendAsync(command);
+            await _dispatcher.SendAsync(command);
 
             return Accepted();        
         }

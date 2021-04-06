@@ -1,6 +1,31 @@
 version: '3'
 services:
-
+    mongo-express:
+      image: mongo-express
+      ports:
+        - 8081:8081
+      environment:
+        ME_CONFIG_BASICAUTH_USERNAME: aloha_user
+        ME_CONFIG_BASICAUTH_PASSWORD: aloha2019!
+        ME_CONFIG_MONGODB_PORT: 27017
+        ME_CONFIG_MONGODB_ADMINUSERNAME: root
+        ME_CONFIG_MONGODB_ADMINPASSWORD: aloha2019!
+      links:
+        - mongo
+      networks:
+        - walterguga
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: aloha2019!
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/var/lib/mongo
+    networks:
+      - walterguga
+      
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
@@ -36,6 +61,8 @@ services:
       - walterguga
 
 volumes:  
+  mongodata:
+    external: true
   rabbitmqdata:
     external: true
 networks:
