@@ -18,4 +18,8 @@
     <PackageReference Include="Aloha.MessageBrokers.RabbitMQ" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Aloha.Persistence.MongoDB\Aloha.Persistence.MongoDB.csproj" />
+  </ItemGroup>
+
 </Project>
