@@ -15,6 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Aloha.CQRS.Notifications;
+using Aloha.Persistence.MongoDB;
+using Aloha.Services.Customers.Domain;
 
 namespace Aloha.Services.Customers
 {
@@ -36,15 +38,15 @@ namespace Aloha.Services.Customers
         public void ConfigureContainer(IContainer container)
         {
             container
-                .AddAloha()
-                .AddCommandHandlers()
-                .AddInMemoryCommandDispatcher()
-                .AddEventHandlers()
-                .AddServiceBusEventDispatcher()
-                .AddInMemoryNotificationDispatcher()
-                .AddRabbitMq()
-              
-                .Build();
+            .AddAloha()
+            .AddCommandHandlers()
+            .AddInMemoryCommandDispatcher()
+            .AddMongo()
+            .AddRabbitMq()
+            .AddServiceBusEventDispatcher()
+            .AddMongo()
+            .AddMongoRepository<Customer, Guid>("customers")
+            .Build();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

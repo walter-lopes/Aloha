@@ -26,7 +26,7 @@ namespace Aloha.Services.Customers.Application.Commands.Handlers
         {
             var customer = new Customer(command.Name);
 
-            await _mongoRepository.AddAsync(customer);
+          //  await _mongoRepository.AddAsync(customer);
 
             var @event = new CustomerCreatedEvent(customer.Id);
 

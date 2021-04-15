@@ -9,6 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Aloha.MessageBrokers.RabbitMQ;
+using Aloha.Persistence.MongoDB;
+using Aloha.Services.Carts.Domain;
+using System;
 
 namespace Aloha.Services.Carts
 {
@@ -30,8 +33,14 @@ namespace Aloha.Services.Carts
         public void ConfigureContainer(IContainer container)
         {
             container
-                .AddAloha()
-                .Build();
+            .AddAloha()
+            .AddEventHandlers()
+            .AddInMemoryCommandDispatcher()
+            .AddMongo()
+            .AddRabbitMq()
+            .AddServiceBusEventDispatcher()
+            .AddMongoRepository<Cart, Guid>("carts")
+            .Build();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +56,9 @@ namespace Aloha.Services.Carts
             app.UseRouting();
 
             container
-                .UseAloha();
+                .UseAloha()
+                .UseRabbitMq()
+                .SubscribeEvent<CustomerCreatedEvent>();
 
             app.UseAuthorization();
 

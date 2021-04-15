@@ -1,24 +1,10 @@
 version: '3'
 services:
-    mongo-express:
-      image: mongo-express
-      ports:
-        - 8081:8081
-      environment:
-        ME_CONFIG_BASICAUTH_USERNAME: aloha_user
-        ME_CONFIG_BASICAUTH_PASSWORD: aloha2019!
-        ME_CONFIG_MONGODB_PORT: 27017
-        ME_CONFIG_MONGODB_ADMINUSERNAME: root
-        ME_CONFIG_MONGODB_ADMINPASSWORD: aloha2019!
-      links:
-        - mongo
-      networks:
-        - walterguga
   mongo:
     image: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: aloha2019!
+      MONGO_INITDB_ROOT_PASSWORD: MongoDB2019!
     ports:
       - "27017:27017"
     volumes:
@@ -39,27 +25,6 @@ services:
       - RABBITMQ_DEFAULT_PASS=guest
     networks:
       - walterguga
-
-  customersapi:
-    image: walterguga/customersapi:1.0
-    build: Aloha.Services.Customers
-    depends_on: 
-        - rabbitmq
-    ports: 
-        - "5100"
-    networks:
-      - walterguga   
-  
-  cartsapi:
-    image: walterguga/cartsapi:1.0
-    build: Aloha.Services.Carts
-    depends_on: 
-        - rabbitmq
-    ports: 
-        - "5200"
-    networks:
-      - walterguga
-
 volumes:  
   mongodata:
     external: true
