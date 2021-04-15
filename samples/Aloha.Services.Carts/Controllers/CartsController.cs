@@ -1,13 +1,8 @@
-﻿using Aloha.CQRS.Commands;
-using Aloha.CQRS.Notifications;
-using Aloha.CQRS.Notifications.Dispatchers;
-using Aloha.Services.Carts.Application.Commands;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Aloha.Services.Carts.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("carts")]
     [ApiController]
     public class CartsController : ControllerBase
     {
@@ -19,8 +14,8 @@ namespace Aloha.Services.Carts.Controllers
         }
 
         
-        [HttpGet("ping")]
-        public IActionResult Get()
+        [HttpPost]
+        public IActionResult Post()
         {
            return Ok("pong");
         }
