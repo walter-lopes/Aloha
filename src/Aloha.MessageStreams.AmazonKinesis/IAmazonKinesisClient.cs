@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Aloha.Streams.AmazonKinesis
+namespace Aloha.MessageStreams.AmazonKinesis
 {
     public interface IAmazonKinesisClient
     {

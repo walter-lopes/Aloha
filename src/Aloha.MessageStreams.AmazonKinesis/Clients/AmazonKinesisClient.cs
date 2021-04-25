@@ -9,7 +9,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aloha.Streams.AmazonKinesis.Clients
+namespace Aloha.MessageStreams.AmazonKinesis.Clients
 {
     public class AmazonKinesisClient : IAmazonKinesisClient
     {

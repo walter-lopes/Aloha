@@ -1,8 +1,8 @@
-﻿using Aloha.Streams.AmazonKinesis.Clients;
-using Aloha.Streams.AmazonKinesis.Publishers;
+﻿using Aloha.MessageStreams.AmazonKinesis.Clients;
+using Aloha.MessageStreams.AmazonKinesis.Publishers;
 using DryIoc;
 
-namespace Aloha.Streams.AmazonKinesis
+namespace Aloha.MessageStreams.AmazonKinesis
 {
     public static class Extensions
     {

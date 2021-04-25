@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Aloha.Streams.AmazonKinesis
+namespace Aloha.MessageStreams.AmazonKinesis
 {
     public interface IConventionsProvider
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Aloha.Streams.AmazonKinesis
+namespace Aloha.MessageStreams.AmazonKinesis
 {
     public class AmazonKinesisOptions
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Aloha.Streams.CQRS
+namespace Aloha.MessageStreams.CQRS
 {
     public static class Extensions
     {

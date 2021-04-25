@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Aloha.Streams.AmazonKinesis.Publishers
+namespace Aloha.MessageStreams.AmazonKinesis.Publishers
 {
     public class AmazonKinesisPublisher : IStreamPublisher
     {

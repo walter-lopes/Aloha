@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Aloha.Streams
+namespace Aloha.MessageStreams
 {
     public interface IStreamPublisher
     {

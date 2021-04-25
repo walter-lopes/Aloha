@@ -10,7 +10,6 @@
     <ProjectReference Include="..\..\src\Aloha.MessageBrokers\Aloha.MessageBrokers.csproj" />
     <ProjectReference Include="..\..\src\Aloha.MessageBrokers.RabbitMQ\Aloha.MessageBrokers.RabbitMQ.csproj" />
     <ProjectReference Include="..\..\src\Aloha.Persistence.MongoDB\Aloha.Persistence.MongoDB.csproj" />
-    <ProjectReference Include="..\..\src\Aloha.Streams.AmazonKinesis\Aloha.Streams.AmazonKinesis.csproj" />
     <ProjectReference Include="..\..\src\Aloha.CQRS.Events\Aloha.CQRS.Events.csproj" />
   </ItemGroup>
 

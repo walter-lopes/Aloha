@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 
-namespace Aloha.Streams.AmazonKinesis.Conventions
+namespace Aloha.MessageStreams.AmazonKinesis.Conventions
 {
     public class ConventionsProvider : IConventionsProvider
     {

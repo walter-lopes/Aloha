@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aloha.Streams.AmazonKinesis.Conventions
+namespace Aloha.MessageStreams.AmazonKinesis.Conventions
 {
     public class MessageConventions : IConventions
     {
