@@ -47,6 +47,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.MessageStreams.Amazon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aloha.MessageStreams.CQRS", "src\Aloha.MessageStreams.CQRS\Aloha.MessageStreams.CQRS.csproj", "{DE78D10B-33FE-43AF-912A-63BF8E2FE806}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aloha.MessageStreams.Kafka", "src\Aloha.MessageStreams.Kafka\Aloha.MessageStreams.Kafka.csproj", "{3FD75E3B-4336-46D9-9CB4-02E13B2820F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +135,10 @@ Global
 		{DE78D10B-33FE-43AF-912A-63BF8E2FE806}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE78D10B-33FE-43AF-912A-63BF8E2FE806}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE78D10B-33FE-43AF-912A-63BF8E2FE806}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FD75E3B-4336-46D9-9CB4-02E13B2820F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FD75E3B-4336-46D9-9CB4-02E13B2820F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FD75E3B-4336-46D9-9CB4-02E13B2820F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FD75E3B-4336-46D9-9CB4-02E13B2820F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,6 +164,7 @@ Global
 		{BC2F63CD-7620-454C-A300-72E50D219C20} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 		{D4EDAE57-1553-4B9A-93A9-EBA93BD99CE0} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 		{DE78D10B-33FE-43AF-912A-63BF8E2FE806} = {65DDED9C-3011-4225-BE10-C25442471F1D}
+		{3FD75E3B-4336-46D9-9CB4-02E13B2820F1} = {65DDED9C-3011-4225-BE10-C25442471F1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {764D7452-E2AD-4907-8F13-D1C2545421FC}

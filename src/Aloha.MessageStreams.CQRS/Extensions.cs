@@ -13,6 +13,18 @@ namespace Aloha.MessageStreams.CQRS
         public static Task PublishAsync<TEvent>(this IStreamPublisher streamPublisher, IEnumerable<TEvent> events, object messageContext)
             where TEvent : class, IEvent
             => streamPublisher.PublishAsync(events, messageContext: messageContext);
+
+        public static IAlohaBuilder AddServiceBusCommandDispatcher(this IAlohaBuilder builder)
+        {
+            builder.Container.Register<ICommandDispatcher, ServiceBusMessageDispatcher>();
+            return builder;
+        }
+
+        public static IAlohaBuilder AddServiceBusEventDispatcher(this IAlohaBuilder builder)
+        {
+            builder.Container.Register<IEventDispatcher, ServiceBusMessageDispatcher>();
+            return builder;
+        }
     }
 }
 

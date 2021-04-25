@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Aloha.CQRS.Notifications;
 using Aloha.Persistence.MongoDB;
 using Aloha.Services.Customers.Domain;
+using Aloha.MessageStreams.Kafka;
 
 namespace Aloha.Services.Customers
 {
@@ -42,7 +43,7 @@ namespace Aloha.Services.Customers
             .AddCommandHandlers()
             .AddInMemoryCommandDispatcher()
             .AddMongo()
-            .AddRabbitMq()
+            .AddKafka()
             .AddServiceBusEventDispatcher()
             .AddMongo()
             .AddMongoRepository<Customer, Guid>("customers")
