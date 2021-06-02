@@ -1,5 +1,4 @@
 ﻿using Aloha.Types;
-using DryIoc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Concurrent;
@@ -10,31 +9,46 @@ namespace Aloha
     public class AlohaBuilder : IAlohaBuilder
     {
         private readonly ConcurrentDictionary<string, bool> _registry = new ConcurrentDictionary<string, bool>();
-        private readonly List<Action<IContainer>> _buildActions;
-        private readonly IContainer _container;
+        private readonly List<Action<IServiceProvider>> _buildActions;
+        private readonly IServiceCollection _services;
+        IServiceCollection IAlohaBuilder.Services => _services;
 
-        public AlohaBuilder(IContainer container)
+        public AlohaBuilder(IServiceCollection services)
         {
-            _buildActions = new List<Action<IContainer>>();
-            _container = container;
-            _container.Register<IStartupInitializer, StartupInitializer>();
+            _buildActions = new List<Action<IServiceProvider>>();
+            _services = services;
+            _services.AddSingleton<IStartupInitializer>(new StartupInitializer());
         }
 
-        IContainer IAlohaBuilder.Container => _container;
+        /// <summary>
+        /// Create new instance of Aloha Builder
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IAlohaBuilder Create(IServiceCollection services)
+           => new AlohaBuilder(services);
 
-        public static IAlohaBuilder Create(IContainer services)
-            => new AlohaBuilder(services);
+        /// <summary>
+        /// Try register new library to app
+        /// </summary>
+        /// <param name="name">Registry name</param>
+        /// <returns></returns>
+        public bool TryRegister(string name) => _registry.TryAdd(name, true);
 
-        public void AddBuildAction(Action<IContainer> execute)
+        public void AddBuildAction(Action<IServiceProvider> execute)
             => _buildActions.Add(execute);
 
         public void AddInitializer(IInitializer initializer)
-            => AddBuildAction(container =>
+            => AddBuildAction(sp =>
             {
-                var startupInitializer = container.GetService<IStartupInitializer>();
+                var startupInitializer = sp.GetService<IStartupInitializer>();
                 startupInitializer.AddInitializer(initializer);
             });
 
+        /// <summary>
+        /// Init libraries when app starts 
+        /// </summary>
+        /// <typeparam name="TInitializer"></typeparam>
         public void AddInitializer<TInitializer>() where TInitializer : IInitializer
             => AddBuildAction(sp =>
             {
@@ -43,12 +57,15 @@ namespace Aloha
                 startupInitializer.AddInitializer(initializer);
             });
 
-        public IContainer Build()
+        /// <summary>
+        /// Build all services in service provider
+        /// </summary>
+        /// <returns></returns>
+        public IServiceProvider Build()
         {
-            _buildActions.ForEach(a => a(_container));
-            return _container;
+            var serviceProvider = _services.BuildServiceProvider();
+            _buildActions.ForEach(a => a(serviceProvider));
+            return serviceProvider;
         }
-
-        public bool TryRegister(string name) => _registry.TryAdd(name, true);
     }
 }

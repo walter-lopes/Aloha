@@ -1,5 +1,5 @@
 ﻿using Aloha.CQRS.Notifications.Dispatchers;
-using DryIoc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Aloha.CQRS.Notifications
 {
@@ -7,7 +7,7 @@ namespace Aloha.CQRS.Notifications
     {
         public static IAlohaBuilder AddInMemoryNotificationDispatcher(this IAlohaBuilder builder)
         {
-            builder.Container.Register<INotificationDispatcher, NotificationDispatcher>(Reuse.Scoped);
+            builder.Services.AddScoped<INotificationDispatcher, NotificationDispatcher>();
             return builder;
         }
     }

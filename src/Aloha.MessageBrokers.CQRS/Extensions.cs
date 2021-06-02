@@ -2,7 +2,6 @@
 using Aloha.CQRS.Events;
 using Aloha.MessageBrokers.CQRS.Dispatchers;
 using Aloha.Types;
-using DryIoc;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
@@ -42,13 +41,13 @@ namespace Aloha.MessageBrokers.CQRS
 
         public static IAlohaBuilder AddServiceBusCommandDispatcher(this IAlohaBuilder builder)
         {
-            builder.Container.Register<ICommandDispatcher, ServiceBusMessageDispatcher>();
+            builder.Services.AddScoped<ICommandDispatcher, ServiceBusMessageDispatcher>();
             return builder;
         }
 
         public static IAlohaBuilder AddServiceBusEventDispatcher(this IAlohaBuilder builder)
         {
-            builder.Container.Register<IEventDispatcher, ServiceBusMessageDispatcher>();
+            builder.Services.AddScoped<IEventDispatcher, ServiceBusMessageDispatcher>();
             return builder;
         }
     }

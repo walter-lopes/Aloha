@@ -1,5 +1,4 @@
-﻿using DryIoc;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,15 +7,15 @@ namespace Aloha.MessageBrokers.AmazonSQS.Subscribers
 {
     public class AmazonSQSSubscriber : IBusSubscriber
     {
-        private readonly IContainer _container;
+        private readonly IServiceProvider _serviceProvider;
         private readonly IAmazonSQSClient _amazonSQSClient;
         private readonly IConventionsProvider _conventions;
 
-        public AmazonSQSSubscriber(IContainer container)
+        public AmazonSQSSubscriber(IServiceProvider serviceProvider)
         {
-            _container = container;
-            _amazonSQSClient = _container.GetRequiredService<IAmazonSQSClient>();
-            _conventions = _container.GetRequiredService<IConventionsProvider>();
+            _serviceProvider = serviceProvider;
+            _amazonSQSClient = _serviceProvider.GetRequiredService<IAmazonSQSClient>();
+            _conventions = _serviceProvider.GetRequiredService<IConventionsProvider>();
         }
 
         public async Task<IBusSubscriber> Subscribe<T>(Func<IServiceProvider, T, object, Task> handle) where T : class
@@ -25,7 +24,7 @@ namespace Aloha.MessageBrokers.AmazonSQS.Subscribers
 
             var message = entries.FirstOrDefault().Message;
 
-            await handle(_container, message, null);
+            await handle(_serviceProvider, message, null);
 
             return this;
         }

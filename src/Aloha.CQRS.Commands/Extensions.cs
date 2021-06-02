@@ -1,7 +1,6 @@
 ﻿using Aloha.CQRS.Commands.Dispatchers;
-using DryIoc;
 using System;
-using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Aloha.CQRS.Commands
 {
@@ -9,19 +8,17 @@ namespace Aloha.CQRS.Commands
     {
         public static IAlohaBuilder AddCommandHandlers(this IAlohaBuilder builder)
         {
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies()
-                                    .SelectMany(x => x.GetTypes())
-                                        .Where(t => t.GetInterfaces().Any(i => i.IsGenericType 
-                                                                            && i.GetGenericTypeDefinition().Equals(typeof(ICommandHandler<>))))
-                                        .Select(x => x.Assembly).ToList();
-
-            builder.Container.RegisterMany(assemblies,  implType => implType.GetImplementedServiceTypes());
+            builder.Services.Scan(s =>
+                  s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
+                      .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)))
+                      .AsImplementedInterfaces()
+                      .WithTransientLifetime());
 
             return builder;
         }
         public static IAlohaBuilder AddInMemoryCommandDispatcher(this IAlohaBuilder builder)
         {
-            builder.Container.Register<ICommandDispatcher, CommandDispatcher>(Reuse.Scoped);
+            builder.Services.AddScoped<ICommandDispatcher, CommandDispatcher>();
             return builder;
         }
     }

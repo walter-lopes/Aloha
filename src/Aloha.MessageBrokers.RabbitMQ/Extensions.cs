@@ -7,7 +7,7 @@ using Aloha.MessageBrokers.RabbitMQ.Plugins;
 using Aloha.MessageBrokers.RabbitMQ.Publishers;
 using Aloha.MessageBrokers.RabbitMQ.Serializers;
 using Aloha.MessageBrokers.RabbitMQ.Subscribers;
-using DryIoc;
+using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
 using System;
 
@@ -21,25 +21,25 @@ namespace Aloha.MessageBrokers.RabbitMQ
         public static IAlohaBuilder AddRabbitMq(this IAlohaBuilder builder, string sectionName = SectionName,
             Action<ConnectionFactory> connectionFactoryConfigurator = null)
         {
-            builder.Container.Register<IContextProvider, ContextProvider>(reuse: Reuse.Singleton);
+            builder.Services.AddSingleton<IContextProvider, ContextProvider>();
 
-            builder.Container.Register<ICorrelationContextAccessor, CorrelationContextAccessor>(reuse: Reuse.Singleton);
+            builder.Services.AddSingleton<ICorrelationContextAccessor, CorrelationContextAccessor>();
             //builder.Services.AddSingleton<IMessagePropertiesAccessor>(new MessagePropertiesAccessor());
-            builder.Container.Register<IConventionsBuilder, ConventionsBuilder>();
-            builder.Container.Register<IConventionsProvider, ConventionsProvider>();
-            builder.Container.Register<IConventionsRegistry, ConventionsRegistry>();
-            builder.Container.Register<IRabbitMqSerializer, NewtonsoftJsonRabbitMqSerializer>();
-            builder.Container.Register<IRabbitMqClient, RabbitMqClient>();
-            builder.Container.Register<IBusPublisher, RabbitMqPublisher>();
-            builder.Container.Register<IBusSubscriber, RabbitMqSubscriber>();
-            builder.Container.Register<IRabbitMqPluginsExecutor, RabbitMqPluginsExecutor>();
-            builder.Container.Register<RabbitMqExchangeInitializer>();
-            builder.Container.Register<RabbitMqHostedService>();
+            builder.Services.AddSingleton<IConventionsBuilder, ConventionsBuilder>();
+            builder.Services.AddSingleton<IConventionsProvider, ConventionsProvider>();
+            builder.Services.AddSingleton<IConventionsRegistry, ConventionsRegistry>();
+            builder.Services.AddSingleton<IRabbitMqSerializer, NewtonsoftJsonRabbitMqSerializer>();
+            builder.Services.AddSingleton<IRabbitMqClient, RabbitMqClient>();
+            builder.Services.AddSingleton<IBusPublisher, RabbitMqPublisher>();
+            builder.Services.AddSingleton<IBusSubscriber, RabbitMqSubscriber>();
+            builder.Services.AddSingleton<IRabbitMqPluginsExecutor, RabbitMqPluginsExecutor>();
+            builder.Services.AddSingleton<RabbitMqExchangeInitializer>();
+            builder.Services.AddSingleton<RabbitMqHostedService>();
 
             builder.AddInitializer<RabbitMqExchangeInitializer>();
 
             var options = builder.GetOptions<RabbitMqOptions>(sectionName);
-            builder.Container.RegisterInstance(options);
+            builder.Services.AddSingleton(options);
 
             var connectionFactory = new ConnectionFactory
             {
@@ -47,28 +47,17 @@ namespace Aloha.MessageBrokers.RabbitMQ
                 VirtualHost = options.VirtualHost,
                 UserName = options.Username,
                 Password = options.Password,
-                //RequestedHeartbeat = options.RequestedHeartbeat,
-                //RequestedConnectionTimeout = options.RequestedConnectionTimeout,
-                //SocketReadTimeout = options.SocketReadTimeout,
-                //SocketWriteTimeout = options.SocketWriteTimeout,
-                //RequestedChannelMax = options.RequestedChannelMax,
-                //RequestedFrameMax = options.RequestedFrameMax,
-                //UseBackgroundThreadsForIO = options.UseBackgroundThreadsForIO,
-                DispatchConsumersAsync = true,
-                //ContinuationTimeout = options.ContinuationTimeout,
-                //HandshakeContinuationTimeout = options.HandshakeContinuationTimeout,
-                //NetworkRecoveryInterval = options.NetworkRecoveryInterval,
-                
+                DispatchConsumersAsync = true                
             };
 
             connectionFactoryConfigurator?.Invoke(connectionFactory);
             var connection = connectionFactory.CreateConnection(options.HostNames, options.ConnectionName);
-            builder.Container.RegisterInstance(connection);
+            builder.Services.AddSingleton(connection);
 
             return builder;
         }
 
-        public static IBusSubscriber UseRabbitMq(this IContainer container)
-           => new RabbitMqSubscriber(container);
+        public static IBusSubscriber UseRabbitMq(this IServiceProvider serviceProvider)
+           => new RabbitMqSubscriber(serviceProvider);
     }
 }

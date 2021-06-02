@@ -2,7 +2,6 @@ using Aloha.CQRS.Commands;
 using Aloha.CQRS.Events;
 using Aloha.MessageBrokers.CQRS;
 using Aloha.Services.Carts.Application.Events.Externals;
-using DryIoc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,11 +27,8 @@ namespace Aloha.Services.Carts
         {
             var mvcBuilder = services.AddControllers();
             mvcBuilder.AddControllersAsServices();
-        }
 
-        public void ConfigureContainer(IContainer container)
-        {
-            container
+            services
             .AddAloha()
             .AddEventHandlers()
             .AddInMemoryCommandDispatcher()
@@ -51,14 +47,7 @@ namespace Aloha.Services.Carts
                 app.UseDeveloperExceptionPage();
             }
 
-            var container = app.ApplicationServices.GetRequiredService<IContainer>();
-
             app.UseRouting();
-
-            container
-                .UseAloha()
-                .UseRabbitMq()
-                .SubscribeEvent<CustomerCreatedEvent>();
 
             app.UseAuthorization();
 
@@ -67,11 +56,5 @@ namespace Aloha.Services.Carts
                 endpoints.MapControllers();
             });
         }
-
-        public static IContainer CreateMyPreConfiguredContainer() =>
-          new Container(rules =>
-              rules.With(propertiesAndFields: request =>
-                  request.ServiceType.Name.EndsWith("Controller") ? PropertiesAndFields.Properties()(request) : null)
-          );
     }
 }

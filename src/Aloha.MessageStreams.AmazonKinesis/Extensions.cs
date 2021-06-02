@@ -1,6 +1,6 @@
 ﻿using Aloha.MessageStreams.AmazonKinesis.Clients;
 using Aloha.MessageStreams.AmazonKinesis.Publishers;
-using DryIoc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Aloha.MessageStreams.AmazonKinesis
 {
@@ -12,11 +12,11 @@ namespace Aloha.MessageStreams.AmazonKinesis
         {
             var options = builder.GetOptions<AmazonKinesisOptions>(sectionName);
 
-            builder.Container.RegisterInstance(options);
+            builder.Services.AddSingleton(options);
 
-            builder.Container.Register<IAmazonKinesisClient, AmazonKinesisClient>();
+            builder.Services.AddSingleton<IAmazonKinesisClient, AmazonKinesisClient>();
 
-            builder.Container.Register<IStreamPublisher, AmazonKinesisPublisher>();
+            builder.Services.AddSingleton<IStreamPublisher, AmazonKinesisPublisher>();
 
             return builder;
         }

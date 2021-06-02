@@ -1,9 +1,10 @@
 ﻿using Aloha.Types;
-using DryIoc;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
+
 
 namespace Aloha
 {
@@ -11,7 +12,7 @@ namespace Aloha
     {
         private const string SectionName = "app";
 
-        public static IAlohaBuilder AddAloha(this IContainer services, string sectionName = SectionName)
+        public static IAlohaBuilder AddAloha(this IServiceCollection services, string sectionName = SectionName)
         {
             if (string.IsNullOrWhiteSpace(sectionName))
             {
@@ -20,7 +21,7 @@ namespace Aloha
 
             var builder = AlohaBuilder.Create(services);
             var options = builder.GetOptions<AppOptions>(sectionName);
-            services.UseInstance(options);
+            services.AddSingleton(options);
             
             if (!options.DisplayBanner || string.IsNullOrWhiteSpace(options.Name))
             {
@@ -33,22 +34,22 @@ namespace Aloha
             return builder;
         }
 
-        public static IContainer UseAloha(this IContainer container)
+        public static IApplicationBuilder UseAloha(this IApplicationBuilder app)
         {
-            using (var scope = container.CreateScope())
+            using (var scope = app.ApplicationServices.CreateScope())
             {
                 var initializer = scope.ServiceProvider.GetRequiredService<IStartupInitializer>();
                 Task.Run(() => initializer.InitializeAsync()).GetAwaiter().GetResult();
             }
 
-            return container;
+            return app;
         }
 
         public static TModel GetOptions<TModel>(this IAlohaBuilder builder, string settingsSectionName)
            where TModel : new()
         {
-
-            var configuration = builder.Container.GetService<IConfiguration>();
+            using var serviceProvider = builder.Services.BuildServiceProvider();
+            var configuration = serviceProvider.GetService<IConfiguration>();
             return configuration.GetOptions<TModel>(settingsSectionName);
         }
 

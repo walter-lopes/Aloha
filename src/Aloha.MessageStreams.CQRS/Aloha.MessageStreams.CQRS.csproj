@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Aloha.CQRS.Commands\Aloha.CQRS.Commands.csproj" />
     <ProjectReference Include="..\Aloha.CQRS.Events\Aloha.CQRS.Events.csproj" />
+    <ProjectReference Include="..\Aloha.MessageBrokers.CQRS\Aloha.MessageBrokers.CQRS.csproj" />
     <ProjectReference Include="..\Aloha.MessageStreams\Aloha.MessageStreams.csproj" />
     <ProjectReference Include="..\Aloha\Aloha.csproj" />
   </ItemGroup>
