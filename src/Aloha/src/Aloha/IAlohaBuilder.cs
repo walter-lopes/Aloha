@@ -1,5 +1,4 @@
 ﻿using Aloha.Types;
-
 using Microsoft.Extensions.DependencyInjection;
 using System;
 

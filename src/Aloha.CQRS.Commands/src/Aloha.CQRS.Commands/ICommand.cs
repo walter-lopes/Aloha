@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-
-namespace Aloha.CQRS.Commands
+﻿namespace Aloha.CQRS.Commands
 {
-    public interface ICommand
-    {
-        bool IsValid();
-    }
+    public interface ICommand { }
+    public interface ICommand<T> : ICommand { }
 }

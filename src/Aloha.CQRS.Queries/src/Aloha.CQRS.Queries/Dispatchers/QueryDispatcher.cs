@@ -13,16 +13,16 @@ namespace Aloha.CQRS.Queries.Dispatchers
             _serviceProvider = serviceProvider;
         }
 
-        public async Task<TResult> QueryAsync<TResult>(IQuery<TResult> query)
+        public async Task<TResponse> QueryAsync<TResponse>(IQuery<TResponse> query)
         {
-            var handlerType = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TResult));
+            var handlerType = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TResponse));
             dynamic handler = _serviceProvider.GetRequiredService(handlerType);
             return await handler.HandleAsync((dynamic)query);
         }
 
-        public async Task<TResult> QueryAsync<TQuery, TResult>(TQuery query) where TQuery : class, IQuery<TResult>
+        public async Task<TResponse> QueryAsync<TQuery, TResponse>(TQuery query) where TQuery : class, IQuery<TResponse>
         {
-            var handler = _serviceProvider.GetRequiredService<IQueryHandler<TQuery, TResult>>();
+            var handler = _serviceProvider.GetRequiredService<IQueryHandler<TQuery, TResponse>>();
             return await handler.HandleAsync(query);
         }
     }
