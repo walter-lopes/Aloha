@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Aloha.MessageBrokers.RabbitMQ;
 using Aloha.CQRS.Commands;
-using Aloha.MessageBrokers.CQRS;
-using Aloha.CQRS.Events;
 using Aloha.Persistence.MongoDB;
 using Aloha.Services.Products.Domain;
 using System;

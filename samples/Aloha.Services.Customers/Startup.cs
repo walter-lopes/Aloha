@@ -12,12 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Aloha.CQRS.Notifications;
 using Aloha.Persistence.MongoDB;
 using Aloha.Services.Customers.Domain;
-using Aloha.MessageStreams.Kafka;
-
 namespace Aloha.Services.Customers
 {
     public class Startup
@@ -39,8 +35,7 @@ namespace Aloha.Services.Customers
             .AddCommandHandlers()
             .AddInMemoryCommandDispatcher()
             .AddMongo()
-            .AddKafka()
-            .AddServiceBusEventDispatcher()
+            
             .AddMongo()
             .AddMongoRepository<Customer, Guid>("customers")
             .Build();

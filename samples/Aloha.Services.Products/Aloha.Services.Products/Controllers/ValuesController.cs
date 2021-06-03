@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Aloha.MessageBrokers;
 using Aloha.CQRS.Commands;
 using Aloha.Services.Products.Commands;
 using System.Threading.Tasks;

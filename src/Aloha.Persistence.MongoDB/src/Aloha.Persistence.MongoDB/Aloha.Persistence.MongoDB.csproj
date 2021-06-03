@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Aloha.CQRS.Queries\Aloha.CQRS.Queries.csproj" />
-    <ProjectReference Include="..\Aloha\Aloha.csproj" />
+    <ProjectReference Include="..\..\..\Aloha.CQRS.Queries\src\Aloha.CQRS.Queries\Aloha.CQRS.Queries.csproj" />
+    <ProjectReference Include="..\..\..\Aloha\src\Aloha\Aloha.csproj" />
   </ItemGroup>
-
+  
 </Project>

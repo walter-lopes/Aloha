@@ -3,5 +3,16 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Aloha.CQRS.Commands\src\Aloha.CQRS.Commands\Aloha.CQRS.Commands.csproj" />
+    <ProjectReference Include="..\..\src\Aloha.CQRS.Events\src\Aloha.CQRS.Events\Aloha.CQRS.Events.csproj" />
+    <ProjectReference Include="..\..\src\Aloha.MessageBrokers.CQRS\src\Aloha.MessageBrokers.CQRS\Aloha.MessageBrokers.CQRS.csproj" />
+    <ProjectReference Include="..\..\src\Aloha.MessageBrokers.RabbitMQ\src\Aloha.MessageBrokers.RabbitMQ\Aloha.MessageBrokers.RabbitMQ.csproj" />
+    <ProjectReference Include="..\..\src\Aloha.MessageBrokers\src\Aloha.MessageBrokers\Aloha.MessageBrokers.csproj" />
+    <ProjectReference Include="..\..\src\Aloha.Persistence.MongoDB\src\Aloha.Persistence.MongoDB\Aloha.Persistence.MongoDB.csproj" />
+    <ProjectReference Include="..\..\src\Aloha\src\Aloha\Aloha.csproj" />
+  </ItemGroup>
+
   
 </Project>

@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Aloha.CQRS.Notifications\Aloha.CQRS.Notifications.csproj" />
-    <ProjectReference Include="..\Aloha\Aloha.csproj" />
+    <ProjectReference Include="..\..\..\Aloha\src\Aloha\Aloha.csproj" />
   </ItemGroup>
 
 </Project>
