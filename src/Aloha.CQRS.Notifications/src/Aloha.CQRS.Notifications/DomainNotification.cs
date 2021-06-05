@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace Aloha.Notifications
 {
@@ -6,16 +7,16 @@ namespace Aloha.Notifications
     {
         public Guid DomainNotificationId { get; private set; }
 
-        public string Key { get; private set; }
+        public HttpStatusCode HttpStatusCode { get; private set; }
 
         public string Value { get; private set; }
 
         public DateTime Timestamp { get; private set; }
 
-        public DomainNotification(string key, string value)
+        public DomainNotification(HttpStatusCode httpStatusCode, string value)
         {
             DomainNotificationId = Guid.NewGuid();
-            Key = key;
+            HttpStatusCode = httpStatusCode;
             Value = value;
             Timestamp = DateTime.UtcNow;
         }

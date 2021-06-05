@@ -20,5 +20,10 @@ namespace Aloha.MessageBrokers.CQRS.Dispatchers
 
         public Task SendAsync<T>(T command) where T : class, ICommand
             => _busPublisher.SendAsync(command, _accessor.CorrelationContext);
+
+        public Task<TResponse> SendAsync<TResponse>(ICommand<TResponse> command)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
