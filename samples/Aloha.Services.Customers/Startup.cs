@@ -33,9 +33,10 @@ namespace Aloha.Services.Customers
             services
              .AddAloha()
             .AddCommandHandlers()
+            .AddEventHandlers()
+            .AddInMemoryEventDispatcher()
             .AddInMemoryCommandDispatcher()
-            .AddMongo()
-            
+            .AddMongo() 
             .AddMongo()
             .AddMongoRepository<Customer, Guid>("customers")
             .Build();

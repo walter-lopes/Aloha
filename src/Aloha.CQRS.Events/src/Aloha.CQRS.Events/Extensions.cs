@@ -13,7 +13,7 @@ namespace Aloha.CQRS.Events
                  s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
                      .AddClasses(c => c.AssignableTo(typeof(IEventHandler<>)))
                      .AsImplementedInterfaces()
-                     .WithTransientLifetime());
+                     .WithScopedLifetime());
 
             return builder;
         }

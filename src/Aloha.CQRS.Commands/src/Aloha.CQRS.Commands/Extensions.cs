@@ -12,7 +12,13 @@ namespace Aloha.CQRS.Commands
                   s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
                       .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)))
                       .AsImplementedInterfaces()
-                      .WithTransientLifetime());
+                      .WithScopedLifetime());
+
+            builder.Services.Scan(s =>
+                  s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
+                      .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<,>)))
+                      .AsImplementedInterfaces()
+                      .WithScopedLifetime());
 
             return builder;
         }

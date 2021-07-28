@@ -12,7 +12,7 @@ namespace Aloha.CQRS.Queries
              s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
                  .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
                  .AsImplementedInterfaces()
-                 .WithTransientLifetime());
+                 .WithScopedLifetime());
 
             return builder;
         }
