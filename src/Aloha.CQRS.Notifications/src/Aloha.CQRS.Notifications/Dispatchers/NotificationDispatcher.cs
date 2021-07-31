@@ -18,11 +18,23 @@ namespace Aloha.CQRS.Notifications.Dispatchers
         /// <summary>
         /// Publish a new domain notification on application
         /// </summary>
-        /// <param name="notification">Domain notification to inform an error and code, adding in notifications list</param>
+        /// <param name="notification">Domain notification to inform an error and code, adding in notification list</param>
         /// <returns></returns>
         public Task PublishAsync(DomainNotification notification)
         {
             _notifications.Add(notification);
+
+            return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Publish a list of domain notifications on application
+        /// </summary>
+        /// <param name="notifications">IEnumerable of domain notification to inform an error and code, adding in notification list</param>
+        /// <returns></returns>
+        public Task PublishAsync(IEnumerable<DomainNotification> notifications)
+        {
+            _notifications.AddRange(notifications);
 
             return Task.CompletedTask;
         }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace Aloha.WebApi
 {
@@ -13,7 +14,7 @@ namespace Aloha.WebApi
     {
         protected readonly NotificationDispatcher _notificationDispatcher;
 
-        protected AlohaController(INotificationDispatcher notificationDispatcher)
+        public AlohaController(INotificationDispatcher notificationDispatcher)
         {
             _notificationDispatcher = (NotificationDispatcher)notificationDispatcher;
         }
@@ -44,6 +45,17 @@ namespace Aloha.WebApi
         /// <param name="message"></param>
         protected void NotifyError(HttpStatusCode httpStatusCode, string message)
             => _notificationDispatcher.PublishAsync(new DomainNotification(httpStatusCode, message));
+
+        /// <summary>
+        /// Notify bad request error messages to list of notification
+        /// </summary>
+        /// <param name="message">Error messages</param>
+        protected async Task NotifyBadRequestErrorsAsync(IEnumerable<string> messages)
+        {
+            IEnumerable<DomainNotification> notifications = messages.Select(message => new DomainNotification(HttpStatusCode.BadRequest, message));
+
+            await _notificationDispatcher.PublishAsync(notifications);
+        }
 
         /// <summary>
         /// Response based on notification
