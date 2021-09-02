@@ -3,7 +3,7 @@
 ## Library open source in .NET base on Convey
 
 
-### The goal is get all concepts of software archicteture, code design and a library that helps enginners to code.
+### The goal is get all concepts of software architecture, code design and a library that helps enginners to their productivity.
 
 
 ## Projects that inspire me.
