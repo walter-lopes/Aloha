@@ -73,7 +73,7 @@ namespace Aloha.Storages.AmazonS3
             {
                 BucketName = storageDocument.Bucket,
                 InputStream = new MemoryStream(storageDocument.File),
-                Key = storageDocument.Path
+                Key = storageDocument.Key
             };
 
             if (publicAvailable)
