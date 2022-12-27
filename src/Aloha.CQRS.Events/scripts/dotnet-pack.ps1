@@ -10,4 +10,4 @@ dotnet pack Aloha.CQRS.Events.csproj -c release /p:PackageVersion="$version" --n
 
 Write-Host Uploading Aloha.CQRS.Events package to Nuget
 
-dotnet nuget push $nupkgFile -k oy2k4hs53p6kvn4ij7qar4ogpl2i4hvuziirfnsihkvb64 -s https://api.nuget.org/v3/index.json
+dotnet nuget push $nupkgFile -k oy2px6vyvtquegqjyz6qr4lsryl3riwurce4ymjrbp6b5q -s https://api.nuget.org/v3/index.json
