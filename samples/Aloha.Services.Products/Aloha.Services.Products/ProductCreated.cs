@@ -10,7 +10,9 @@ namespace Aloha.Services.Products
 
         public string Name { get; set; }
 
+        public Guid Who { get; set; }
         public Guid MessageId { get; set; }
+        public string MessageType { get; set; }
     }
 
     public class ProductEventHandler : IEventHandler<ProductCreated>

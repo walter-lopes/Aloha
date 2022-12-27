@@ -4,7 +4,10 @@ namespace Aloha.CQRS.Events
 {
     public interface IEvent
     {
-        DateTime DateTime => DateTime.Now;
+        DateTime When => DateTime.UtcNow;
+
+        Guid Who { set; get; }
+        
         Guid MessageId { set; get; }
     }
 }

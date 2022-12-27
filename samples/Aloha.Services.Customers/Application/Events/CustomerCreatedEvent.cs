@@ -11,6 +11,8 @@ namespace Aloha.Services.Customers.Application.Events
         }
 
         public Guid CustomerId { get; set; }
+        public Guid Who { get; set; }
         public Guid MessageId { get; set; }
+        public string MessageType { get; set; }
     }
 }

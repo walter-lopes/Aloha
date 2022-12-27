@@ -1,4 +1,4 @@
-New-Variable -Name "version" -Value "1.0.1"
+New-Variable -Name "version" -Value "1.0.2"
 New-Variable -Name "project" -Value "Aloha.CQRS.Events"
 New-Variable -Name "nupkgFile" -Value "$project.$version.nupkg"
 

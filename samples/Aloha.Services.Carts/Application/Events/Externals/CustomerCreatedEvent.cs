@@ -10,6 +10,8 @@ namespace Aloha.Services.Carts.Application.Events.Externals
     {
         public Guid CustomerId { get; set; }
 
+        public Guid Who { get; set; }
         public Guid MessageId { get; set; }
+        public string MessageType { get; set; }
     }
 }
