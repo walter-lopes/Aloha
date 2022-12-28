@@ -25,7 +25,8 @@ namespace Aloha.CQRS.Events.Dispatchers
         {
             if (_options.EventSourcingEnabled)
             {
-                var storedEvent = new StoredEvent(@event);
+               // var newEvent = _options.IsMultiTenant ? (ITenantEvent) @event : @event;
+               var storedEvent = new StoredEvent(@event);
                 await _eventStoreRepository.Insert(storedEvent);
             }
             

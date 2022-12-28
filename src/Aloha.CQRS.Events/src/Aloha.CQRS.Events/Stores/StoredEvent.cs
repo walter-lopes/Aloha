@@ -9,14 +9,15 @@ namespace Aloha.CQRS.Events.Stores
             Id = Guid.NewGuid();
             Payload = payload;
             MessageType = payload.GetType().Name;
+            SetTenantId(payload);
         }
         
-        public StoredEvent(ITenantEvent payload)
+        private void SetTenantId(IEvent payload)
         {
-            Id = Guid.NewGuid();
-            Payload = payload;
-            MessageType = payload.GetType().Name;
-            TenantId = payload.TenantId;
+            if (payload is ITenantEvent tenantPayload)
+            {
+                TenantId = tenantPayload.TenantId;
+            }
         }
 
         public Guid Id { get; private set; }
