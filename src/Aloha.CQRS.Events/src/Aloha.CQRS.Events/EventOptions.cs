@@ -8,5 +8,7 @@ namespace Aloha.CQRS.Events
 
 
         public string Database { get; set; }
+        
+        public bool IsMultiTenant { get; set; }
     }
 }

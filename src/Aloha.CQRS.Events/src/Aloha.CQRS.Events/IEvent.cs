@@ -7,7 +7,5 @@ namespace Aloha.CQRS.Events
         DateTime When => DateTime.UtcNow;
 
         Guid Who { set; get; }
-        
-        Guid MessageId { set; get; }
     }
 }
